@@ -1,0 +1,50 @@
+@use './veriables' as *;
+
+// Media Queries
+@mixin media-es() {
+  @media screen and ($media-es) {
+    @content;
+  }
+}
+
+@mixin media-xs() {
+  @media screen and ($media-xs) {
+    @content;
+  }
+}
+
+@mixin media-sm {
+  @media screen and ($media-sm) {
+    @content;
+  }
+}
+
+@mixin media-md {
+  @media screen and ($media-md) {
+    @content;
+  }
+}
+
+@mixin media-lg {
+  @media screen and ($media-lg) {
+    @content;
+  }
+}
+
+@mixin media-xl {
+  @media screen and ($media-xl) {
+    @content;
+  }
+}
+
+@mixin media-xxl {
+  @media screen and ($media-xxl) {
+    @content;
+  }
+}
+
+@mixin media-query($breakpoint) {
+  @media screen and #{$breakpoint} {
+    @content;
+  }
+}

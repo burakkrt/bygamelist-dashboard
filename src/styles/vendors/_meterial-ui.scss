@@ -1,0 +1,165 @@
+.gl-input-filled {
+  background-color: var(--gl-body-v3);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+  .MuiFormLabel-root {
+    font-family: var(--font-poppins);
+    font-size: 16px;
+    color: var(--gl-subtitle-v1);
+  }
+
+  .MuiInputBase-root {
+    .MuiInputBase-input {
+      font-family: var(--font-poppins);
+      font-size: 16px;
+      letter-spacing: 0.4px;
+      font-weight: 500;
+      color: var(--gl-primary-v2);
+      min-height: auto;
+      height: 24px;
+    }
+
+    .MuiInputAdornment-root {
+      .base-icon {
+        font-size: 18px;
+        color: var(--gl-text-v1);
+      }
+    }
+
+    &:hover {
+      &::before {
+        border-bottom: 2px solid var(--gl-subtitle-v1);
+      }
+    }
+
+    &::before {
+      border-bottom: 2px solid var(--gl-subtitle-v1);
+    }
+
+    &::after {
+      border-bottom: 2px solid var(--gl-primary-v2);
+    }
+  }
+}
+
+.gl-multiselect-filled {
+  background-color: var(--gl-body-v3);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+  &.server-type {
+    width: 100%;
+    max-width: 260px;
+    min-width: 240px;
+  }
+
+  &.datesort {
+    width: 100%;
+    max-width: 210px;
+    min-width: 190px;
+  }
+
+  .MuiFormLabel-root {
+    font-family: var(--font-poppins);
+    font-size: 16px;
+    color: var(--gl-subtitle-v1);
+  }
+
+  .MuiInputBase-root {
+    .MuiSelect-select {
+      font-family: var(--font-poppins);
+      font-size: 16px;
+      line-height: 26px;
+      letter-spacing: 0.4px;
+      font-weight: 500;
+      color: var(--gl-primary-v2);
+      min-height: auto;
+      height: 24px;
+    }
+
+    .MuiSvgIcon-root {
+      font-size: 24px;
+      color: var(--gl-text-v1);
+    }
+
+    &:hover {
+      &::before {
+        border-bottom: 2px solid var(--gl-subtitle-v1);
+      }
+    }
+
+    &::before {
+      border-bottom: 2px solid var(--gl-subtitle-v1);
+    }
+
+    &::after {
+      border-bottom: 2px solid var(--gl-primary-v2);
+    }
+  }
+}
+
+.switch-group {
+  height: 57px;
+
+  .MuiFormControlLabel-root {
+    margin-left: -6px;
+    margin-right: 12px;
+    height: calc(57px / 2);
+
+    .MuiSwitch-root {
+      .MuiButtonBase-root {
+        color: var(--gl-subtitle-v1);
+        &.Mui-checked {
+          color: var(--gl-primary-v2);
+
+          + .MuiSwitch-track {
+            background-color: var(--gl-primary-v2);
+          }
+        }
+      }
+
+      .MuiSwitch-track {
+        background-color: var(--gl-body-v1);
+      }
+    }
+
+    .MuiTypography-root {
+      font-family: var(--font-poppins);
+      font-size: 16px;
+      line-height: 18px;
+      letter-spacing: 0;
+      text-wrap: nowrap;
+    }
+  }
+}
+
+.gl-select-popup {
+  background-color: var(--gl-body-v5);
+  color: var(--gl-text-v1);
+
+  ul.MuiList-root {
+    li.MuiButtonBase-root {
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: 500;
+      height: 42px;
+
+      .MuiCheckbox-root {
+        color: var(--gl-text-v1);
+        padding: 6px 10px 6px 0;
+        .MuiSvgIcon-root {
+          font-size: 20px;
+        }
+      }
+
+      .MuiListItemText-root {
+        .MuiTypography-root {
+          font-size: 16px;
+          line-height: 22px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

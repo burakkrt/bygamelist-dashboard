@@ -1,0 +1,16 @@
+// break points
+$breakpoint-es: 360px;
+$breakpoint-xs: 480px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 1024px;
+$breakpoint-lg: 1200px;
+$breakpoint-xl: 1440px;
+$breakpoint-xxl: 1654px;
+
+$media-es: '(max-width: #{$breakpoint-es})';
+$media-xs: '(max-width: #{$breakpoint-xs})';
+$media-sm: '(max-width: #{$breakpoint-sm})';
+$media-md: '(max-width: #{$breakpoint-md})';
+$media-lg: '(max-width: #{$breakpoint-lg})';
+$media-xl: '(max-width: #{$breakpoint-xl})';
+$media-xxl: '(max-width: #{$breakpoint-xxl})';

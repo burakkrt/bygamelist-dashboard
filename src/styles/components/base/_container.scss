@@ -1,0 +1,37 @@
+@use '../../abstracts' as *;
+
+.container {
+  --bs-gutter-x: 3rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+
+  @include media-sm {
+    --bs-gutter-x: 2.5rem;
+  }
+
+  &-fuild {
+    --bs-gutter-x: 0;
+    max-width: 1920px;
+  }
+
+  &-extended {
+    max-width: calc(1624px + var(--bs-gutter-x));
+  }
+
+  &-wide {
+    width: 1440px;
+  }
+
+  &-medium {
+    width: 1216px;
+  }
+
+  &-mobile {
+    width: 390px;
+  }
+}
