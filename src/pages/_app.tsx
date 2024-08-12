@@ -1,9 +1,10 @@
 import type { AppProps } from 'next/app'
 import '../styles/main.scss'
 import { Poppins } from 'next/font/google'
-import Footer from '@/components/footer'
-import Sidebar from '@/components/sidebar'
-import Container from '@/components/base/container'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
+import getLayout from '@/functions/getLayout'
 
 const fontPoppins = Poppins({
   subsets: ['latin'],
@@ -12,17 +13,21 @@ const fontPoppins = Poppins({
 })
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+
+  const [queryClient] = useState(() => new QueryClient())
+
+  const Layout = getLayout(router.pathname)
+
   return (
-    <div className={`${fontPoppins.variable}`}>
-      <main>
-        <Container size="wide">
-          <div className="root-layout">
-            <Sidebar />
+    <QueryClientProvider client={queryClient}>
+      <div className={`${fontPoppins.variable}`}>
+        <main>
+          <Layout>
             <Component {...pageProps} />
-          </div>
-        </Container>
-      </main>
-      <Footer />
-    </div>
+          </Layout>
+        </main>
+      </div>
+    </QueryClientProvider>
   )
 }

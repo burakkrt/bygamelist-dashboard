@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { IWelcomeHeroProps } from './types'
 
 function WelcomeHero({}: IWelcomeHeroProps) {
