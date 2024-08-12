@@ -1,0 +1,42 @@
+.user-login-singup {
+  color: var(--gl-text-v2);
+  background-color: var(--gl-body-v4);
+
+  &-in {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .header {
+      margin-bottom: 48px;
+      .logo {
+        width: 200px;
+        height: 60px;
+        margin: auto;
+      }
+
+      .title {
+        font-size: 32px;
+      }
+    }
+
+    .user-login-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      row-gap: 16px;
+
+      .form-item {
+        border-radius: 4px;
+        min-width: 260px;
+      }
+
+      .submit-button {
+        margin-top: 16px;
+      }
+    }
+  }
+}

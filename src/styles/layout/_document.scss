@@ -83,8 +83,35 @@ main {
     sans-serif;
 }
 
-.root-layout {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  min-height: calc(100vh - 114px);
+.MuiTextField-root {
+  background-color: var(--gl-body-v2);
+}
+
+.MuiFormLabel-root {
+  font-family: var(--font-poppins);
+  font-size: 16px;
+
+  &.Mui-focused {
+    color: var(--gl-subtitle-v1);
+  }
+}
+
+.MuiInputBase-input {
+  font-family: var(--font-poppins);
+  font-size: 16px;
+  letter-spacing: 0.2px;
+  color: var(--gl-body-v5);
+}
+
+.MuiFilledInput-root {
+  &::after {
+    border-bottom: 2px solid var(--gl-red-v3);
+  }
+}
+
+.MuiButtonBase-root {
+  font-family: var(--font-poppins);
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: none;
 }
