@@ -2,24 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Container from '@/components/base/container'
 import { Box, Button, TextField } from '@mui/material'
 import Image from '@/components/base/image'
-import { useMutation } from '@tanstack/react-query'
+import useUserLogin from '@/hooks/useUserLogin'
+import useUserStore from '@/store/useStore'
 import { IUserLoginFormValues } from './types'
-
-const loginUser = async (formValues: IUserLoginFormValues) => {
-  const response = await fetch('http://localhost:9000/v1/user/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(formValues),
-  })
-
-  if (!response.ok) {
-    throw new Error('Network response was not ok')
-  }
-
-  return response.json()
-}
 
 function Page() {
   const initialFormValues: IUserLoginFormValues = {
@@ -29,15 +14,12 @@ function Page() {
 
   const [formValues, setFormValues] = useState<IUserLoginFormValues>(initialFormValues)
 
-  const mutation = useMutation({
-    mutationFn: loginUser,
-    onSuccess: (data) => {
-      console.log('Login successful', data)
-    },
-    onError: (error) => {
-      console.error('Login failed', error)
-    },
-  })
+  const mutation = useUserLogin()
+  const tt = useUserStore()
+
+  useEffect(() => {
+    console.log(tt)
+  }, [tt])
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -47,10 +29,6 @@ function Page() {
   const hanleChange = (key: keyof IUserLoginFormValues, value: any) => {
     setFormValues((prev) => ({ ...prev, [key]: value }))
   }
-
-  useEffect(() => {
-    console.log('formValues', formValues)
-  }, [formValues])
 
   return (
     <div className="user-login-singup">
