@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { useEffect } from 'react'
+import Cookies from 'js-cookie'
 import { IUserStore } from './types'
 
 const useUserStore = create<IUserStore>((set) => ({
@@ -23,14 +24,19 @@ export const useInitializeUserStore = () => {
   const setToken = useUserStore((state) => state.setToken)
 
   useEffect(() => {
-    const userData = localStorage.getItem('user')
-    if (userData) {
-      const parsedData = JSON.parse(userData)
-      setId(parsedData.id || '')
-      setName(parsedData.name || '')
-      setSurname(parsedData.surname || '')
-      setEmail(parsedData.email || '')
-      setToken(parsedData.token || '')
+    const userInfo = Cookies.get('userInfo')
+    const userToken = Cookies.get('userToken')
+
+    if (userInfo) {
+      const parsedUserInfo = JSON.parse(userInfo)
+      setId(parsedUserInfo.id || '')
+      setName(parsedUserInfo.name || '')
+      setSurname(parsedUserInfo.surname || '')
+      setEmail(parsedUserInfo.email || '')
+    }
+
+    if (userToken) {
+      setToken(userToken || '')
     }
   }, [setId, setName, setSurname, setEmail, setToken])
 }

@@ -3,8 +3,7 @@ import Container from '@/components/base/container'
 import { Box, Button, TextField } from '@mui/material'
 import Image from '@/components/base/image'
 import useUserLogin from '@/hooks/useUserLogin'
-import useUserStore from '@/store/useStore'
-import Cookies from 'js-cookie'
+import { useRouter } from 'next/router'
 import { IUserLoginFormValues } from './types'
 
 function Page() {
@@ -12,30 +11,25 @@ function Page() {
     email: '',
     password: '',
   }
-
   const [formValues, setFormValues] = useState<IUserLoginFormValues>(initialFormValues)
-
   const mutation = useUserLogin()
-  const tt = useUserStore()
-
-  useEffect(() => {
-    console.log(tt)
-  }, [tt])
+  const router = useRouter()
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
     mutation.mutate(formValues)
   }
 
+  useEffect(() => {
+    if (mutation.isSuccess) {
+      const redirectTo = router.query.redirect || '/'
+      router.push(redirectTo as string)
+    }
+  }, [mutation, router])
+
   const hanleChange = (key: keyof IUserLoginFormValues, value: any) => {
     setFormValues((prev) => ({ ...prev, [key]: value }))
   }
-
-  useEffect(() => {
-    // Cookie'den token'ı al
-    const tokenFromCookie = Cookies.get('token')
-    console.log('tokenFromCookie', tokenFromCookie)
-  }, [])
 
   return (
     <div className="user-login-singup">
