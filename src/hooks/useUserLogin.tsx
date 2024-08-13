@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import fetcher from '@/services/fetcher'
+import Cookies from 'js-cookie'
 import { IPostUserLogin } from '@/services/types'
 
 function useUserLogin() {
@@ -13,6 +14,7 @@ function useUserLogin() {
     onSuccess: (data: IPostUserLogin) => {
       if (data.data.length > 0) {
         const [res] = data.data
+        Cookies.set('userToken', res.token, { expires: 1 / 24 })
         localStorage.setItem(
           'user',
           JSON.stringify({

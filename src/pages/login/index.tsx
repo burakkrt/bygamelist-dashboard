@@ -4,6 +4,7 @@ import { Box, Button, TextField } from '@mui/material'
 import Image from '@/components/base/image'
 import useUserLogin from '@/hooks/useUserLogin'
 import useUserStore from '@/store/useStore'
+import Cookies from 'js-cookie'
 import { IUserLoginFormValues } from './types'
 
 function Page() {
@@ -29,6 +30,12 @@ function Page() {
   const hanleChange = (key: keyof IUserLoginFormValues, value: any) => {
     setFormValues((prev) => ({ ...prev, [key]: value }))
   }
+
+  useEffect(() => {
+    // Cookie'den token'ı al
+    const tokenFromCookie = Cookies.get('token')
+    console.log('tokenFromCookie', tokenFromCookie)
+  }, [])
 
   return (
     <div className="user-login-singup">
