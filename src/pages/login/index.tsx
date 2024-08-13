@@ -4,6 +4,7 @@ import { Box, Button, TextField } from '@mui/material'
 import Image from '@/components/base/image'
 import useUserLogin from '@/hooks/useUserLogin'
 import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
 import { IUserLoginFormValues } from './types'
 
 function Page() {
@@ -22,10 +23,15 @@ function Page() {
 
   useEffect(() => {
     if (mutation.isSuccess) {
+      toast.success('Giriş işlemi başarılı.')
       const redirectTo = router.query.redirect || '/'
       router.push(redirectTo as string)
     }
-  }, [mutation, router])
+
+    if (mutation.isError) {
+      toast.error(`Giriş işlemi başarısız.`)
+    }
+  }, [mutation.isSuccess, mutation.isError, router])
 
   const hanleChange = (key: keyof IUserLoginFormValues, value: any) => {
     setFormValues((prev) => ({ ...prev, [key]: value }))
@@ -45,12 +51,18 @@ function Page() {
             </div>
             <h1 className="title">Kullanıcı Girişi</h1>
           </div>
-          <Box component="form" onSubmit={onSubmit} className="user-login-form">
+          <Box
+            component="form"
+            onSubmit={onSubmit}
+            className="user-login-form"
+            autoComplete="on"
+          >
             <TextField
               type="email"
               className="form-item"
               label="E-Mail"
               variant="filled"
+              required
               value={formValues.email}
               onChange={(e) => hanleChange('email', e.target.value)}
             />
@@ -59,6 +71,7 @@ function Page() {
               className="form-item"
               label="Şifre"
               variant="filled"
+              required
               value={formValues.password}
               onChange={(e) => hanleChange('password', e.target.value)}
             />
