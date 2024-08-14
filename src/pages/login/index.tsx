@@ -29,9 +29,10 @@ function Page() {
     }
 
     if (mutation.isError) {
-      toast.error(`Giriş işlemi başarısız.`)
+      const errorMessage = mutation.error.message
+      toast.error(`${errorMessage}`)
     }
-  }, [mutation.isSuccess, mutation.isError, router])
+  }, [mutation.error, mutation.isSuccess, mutation.isError, router])
 
   const hanleChange = (key: keyof IUserLoginFormValues, value: any) => {
     setFormValues((prev) => ({ ...prev, [key]: value }))

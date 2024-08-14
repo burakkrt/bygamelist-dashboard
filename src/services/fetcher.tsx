@@ -15,17 +15,31 @@ const fetcher = async ({
     headers.Authorization = `Bearer ${token}`
   }
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/${endpoint}`, {
-    method,
-    headers,
-    body: body ? JSON.stringify(body) : undefined,
-  })
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/${endpoint}`, {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined,
+    })
 
-  if (!response.ok) {
-    throw new Error('Network response was not ok')
+    if (!response.ok) {
+      const errorData = await response.json()
+      const errorMessage = errorData?.error?.message || 'Bilinmeyen bir hata oluştu.'
+      throw new Error(errorMessage)
+    }
+
+    return response.json()
+  } catch (error: unknown) {
+    if (error instanceof TypeError) {
+      throw new Error('Sunucuya ulaşılamıyor.')
+    }
+
+    if (error instanceof Error) {
+      throw error
+    } else {
+      throw new Error('Bilinmeyen bir hata oluştu.')
+    }
   }
-
-  return response.json()
 }
 
 export default fetcher
