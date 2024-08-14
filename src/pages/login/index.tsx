@@ -81,6 +81,7 @@ function Page() {
               variant="contained"
               size="large"
               className="submit-button"
+              disabled={mutation.isPending}
             >
               Giriş Yap
             </Button>
