@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
-import fetcher from '@/services/fetcher'
+import fetcher from '@/utils/services/fetcher'
 import Cookies from 'js-cookie'
-import { IPostUserLogin } from '@/services/types'
+import { IPostUserLogin } from '@/utils/services/types'
 
 function useUserLogin() {
   return useMutation({

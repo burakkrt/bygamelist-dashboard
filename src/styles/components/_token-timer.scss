@@ -1,0 +1,41 @@
+.token-timer {
+  position: absolute;
+  top: 16px;
+  right: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--gl-subtitle-v2);
+
+  a {
+    margin-top: 12px;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--gl-text-v2);
+    background-color: var(--gl-body-v5);
+    transition: 130ms ease-in-out;
+
+    &:hover {
+      color: var(--gl-blue-v3);
+      background-color: var(--gl-body-v1);
+    }
+  }
+
+  @keyframes warningToken {
+    from {
+      color: var(--gl-text-v2);
+    }
+
+    to {
+      color: var(--gl-red-v1);
+    }
+  }
+
+  &.token-left {
+    top: 8px;
+    right: 12px;
+    animation: warningToken 1s ease-in-out infinite alternate;
+  }
+}

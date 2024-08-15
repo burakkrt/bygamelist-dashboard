@@ -22,6 +22,13 @@ export type IconTypes =
   | 'icon-sword'
   | 'icon-spinner'
   | 'icon-log-out'
+  | 'icon-list'
+  | 'icon-list-add'
+  | 'icon-list-check'
+  | 'icon-eye'
+  | 'icon-home'
+  | 'icon-games'
+  | 'icon-metin2'
 
 export interface IIconProps extends React.HTMLProps<HTMLElement> {
   name: IconTypes

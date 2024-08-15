@@ -1,0 +1,1 @@
+export interface IPageMetin2PublishServerProps {}

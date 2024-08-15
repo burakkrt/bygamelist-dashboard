@@ -6,6 +6,7 @@ import {
   IIconOptions,
   INavigationMap,
   INavigationPagesProps,
+  IPageOptions,
   IRenderAnchorChildrenProps,
 } from './types'
 
@@ -17,51 +18,79 @@ function NavigationPages({ pageType, location, className }: INavigationPagesProp
           label: 'Anasayfa',
           href: '/',
           locations: ['header'],
+          icons: [
+            {
+              iconLocation: ['header'],
+              beforeIcon: 'icon-home',
+            },
+          ],
         },
         {
-          label: 'Metin2 PVP Serverleri',
-          href: '/',
-          locations: ['header', 'panel', 'footer'],
+          label: 'Oyunlar',
+          href: '/games',
+          locations: ['header'],
+          icons: [
+            {
+              iconLocation: ['header'],
+              beforeIcon: 'icon-menu-right',
+            },
+          ],
+          subPages: [
+            {
+              label: 'Metin2',
+              href: '/games/metin2',
+              locations: ['header'],
+              icons: [
+                {
+                  iconLocation: ['header'],
+                  beforeIcon: 'icon-metin2',
+                },
+              ],
+              subPages: [
+                {
+                  label: 'Sunucu Ekle',
+                  href: '/games/metin2/add-server',
+                  icons: [
+                    {
+                      iconLocation: ['header'],
+                      beforeIcon: 'icon-list-add',
+                    },
+                  ],
+                },
+                {
+                  label: 'Sunucu Yayınla',
+                  href: '/games/metin2/publish-server',
+                  icons: [
+                    {
+                      iconLocation: ['header'],
+                      beforeIcon: 'icon-list-check',
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
         },
+
         {
-          label: 'Metin2 Yayıncıları',
-          href: '/',
-          locations: ['header', 'panel', 'footer'],
+          label: 'Siteyi Görüntüle',
+          href: 'https://bygamelist.com',
+          target: '_blank',
+          locations: ['header'],
+          icons: [
+            {
+              iconLocation: ['header'],
+              beforeIcon: 'icon-eye',
+            },
+          ],
         },
       ],
       otherPages: [
         {
-          label: 'Hakkımızda',
-          href: '/',
-          locations: ['panel'],
-          icons: [
-            {
-              iconLocation: ['panel'],
-              beforeIcon: 'icon-document',
-            },
-          ],
-        },
-        {
-          label: 'Tanıtım ve İşbirliği',
-          href: '/',
-          locations: ['panel'],
-          icons: [
-            {
-              iconLocation: ['panel'],
-              beforeIcon: 'icon-document',
-            },
-          ],
-        },
-        {
-          label: 'İletişim',
-          href: '/',
-          locations: ['panel'],
-          icons: [
-            {
-              iconLocation: ['panel'],
-              beforeIcon: 'icon-document',
-            },
-          ],
+          label: 'Siteyi Görüntüle',
+          href: 'https://bygamelist.com',
+          target: '_blank',
+          locations: ['footer'],
         },
       ],
     }),
@@ -92,9 +121,38 @@ function NavigationPages({ pageType, location, className }: INavigationPagesProp
     [location]
   )
 
+  const renderSubPages = useCallback(
+    (subPages: IPageOptions['subPages']) => {
+      if (!subPages || subPages?.length === 0) {
+        return null
+      }
+
+      return (
+        <ul className="nav-pages">
+          {subPages.map((page) => (
+            <li key={`${page.label}-${page.href}`}>
+              <Anchor
+                href={page.href}
+                className="nav-anchor"
+                target={page?.target || '_self'}
+              >
+                {renderAnchorChildren({
+                  pageLabel: page.label,
+                  icons: page?.icons,
+                })}
+              </Anchor>
+              {page?.subPages && renderSubPages(page.subPages)}
+            </li>
+          ))}
+        </ul>
+      )
+    },
+    [renderAnchorChildren]
+  )
+
   if (targetPages && targetPages.length > 0) {
     return (
-      <nav
+      <ul
         className={classNames(
           'nav-pages',
           `nav-${pageType}`,
@@ -102,16 +160,19 @@ function NavigationPages({ pageType, location, className }: INavigationPagesProp
           className
         )}
       >
-        <ul>
-          {targetPages.map((page) => (
-            <li key={`${page.label}-${page.href}`}>
-              <Anchor href={page.href} className="nav-anchor">
-                {renderAnchorChildren({ pageLabel: page.label, icons: page?.icons })}
-              </Anchor>
-            </li>
-          ))}
-        </ul>
-      </nav>
+        {targetPages.map((page) => (
+          <li key={`${page.label}-${page.href}`}>
+            <Anchor
+              href={page.href}
+              className={classNames('nav-anchor', page.href === '#' && 'link-none')}
+              target={page?.target || '_self'}
+            >
+              {renderAnchorChildren({ pageLabel: page.label, icons: page?.icons })}
+            </Anchor>
+            {page?.subPages && renderSubPages(page.subPages)}
+          </li>
+        ))}
+      </ul>
     )
   }
 

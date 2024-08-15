@@ -1,6 +1,8 @@
 .sidebar {
+  display: flex;
+  flex-direction: column;
+
   background-color: var(--gl-body-v2);
-  border-left: 1px solid var(--gl-border-v1);
 
   .header {
     padding: 20px;
@@ -42,9 +44,15 @@
       }
 
       .base-icon {
-        font-size: 20px;
-        margin-right: 10px;
+        font-size: 18px;
       }
     }
+  }
+
+  .body {
+    flex-grow: 1;
+  }
+
+  .footer {
   }
 }

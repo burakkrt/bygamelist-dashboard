@@ -1,29 +1,36 @@
 $icomoon-font-family: 'bygamelist' !default;
 $icomoon-font-path: '/icomoon' !default;
 
+$icon-metin2: unquote('"\\e900"');
+$icon-games: unquote('"\\e91d"');
+$icon-list: unquote('"\\e91b"');
+$icon-home: unquote('"\\e917"');
+$icon-eye: unquote('"\\e918"');
+$icon-list-check: unquote('"\\e919"');
+$icon-list-add: unquote('"\\e91a"');
 $icon-log-out: unquote('"\\e916"');
 $icon-spinner: unquote('"\\e915"');
-$icon-sell: unquote('"\\e900"');
-$icon-sword: unquote('"\\e901"');
-$icon-flash: unquote('"\\e902"');
+$icon-sell: unquote('"\\e901"');
+$icon-sword: unquote('"\\e902"');
+$icon-flash: unquote('"\\e903"');
 $icon-document: unquote('"\\e911"');
-$icon-close: unquote('"\\e903"');
-$icon-menu-right: unquote('"\\e904"');
-$icon-telegram: unquote('"\\e905"');
-$icon-x: unquote('"\\e906"');
-$icon-youtube: unquote('"\\e907"');
-$icon-instagram: unquote('"\\e908"');
-$icon-linkedin: unquote('"\\e909"');
-$icon-facebook: unquote('"\\e90a"');
-$icon-discord: unquote('"\\e90b"');
-$icon-clear: unquote('"\\e90c"');
-$icon-send: unquote('"\\e90d"');
-$icon-chevron-right: unquote('"\\e90e"');
-$icon-chevron-left: unquote('"\\e90f"');
-$icon-chevron-down: unquote('"\\e910"');
-$icon-chevron-up: unquote('"\\e912"');
-$icon-checkmark: unquote('"\\e913"');
-$icon-search: unquote('"\\e914"');
+$icon-close: unquote('"\\e904"');
+$icon-menu-right: unquote('"\\e905"');
+$icon-telegram: unquote('"\\e906"');
+$icon-x: unquote('"\\e907"');
+$icon-youtube: unquote('"\\e908"');
+$icon-instagram: unquote('"\\e909"');
+$icon-linkedin: unquote('"\\e90a"');
+$icon-facebook: unquote('"\\e90b"');
+$icon-discord: unquote('"\\e90c"');
+$icon-clear: unquote('"\\e90d"');
+$icon-send: unquote('"\\e90e"');
+$icon-chevron-right: unquote('"\\e90f"');
+$icon-chevron-left: unquote('"\\e910"');
+$icon-chevron-down: unquote('"\\e912"');
+$icon-chevron-up: unquote('"\\e913"');
+$icon-checkmark: unquote('"\\e914"');
+$icon-search: unquote('"\\e91c"');
 
 @font-face {
   font-family: '#{$icomoon-font-family}';
@@ -52,6 +59,41 @@ i {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-metin2 {
+  &:before {
+    content: $icon-metin2;
+  }
+}
+.icon-games {
+  &:before {
+    content: $icon-games;
+  }
+}
+.icon-list {
+  &:before {
+    content: $icon-list;
+  }
+}
+.icon-home {
+  &:before {
+    content: $icon-home;
+  }
+}
+.icon-eye {
+  &:before {
+    content: $icon-eye;
+  }
+}
+.icon-list-check {
+  &:before {
+    content: $icon-list-check;
+  }
+}
+.icon-list-add {
+  &:before {
+    content: $icon-list-add;
+  }
+}
 .icon-log-out {
   &:before {
     content: $icon-log-out;

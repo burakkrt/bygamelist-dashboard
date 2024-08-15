@@ -6,6 +6,7 @@ import useUserStore from '@/store/useStore'
 import Image from '../base/image'
 import Icon from '../base/icon'
 import { ISidebarProps } from './types'
+import NavigationPages from '../navigation-pages'
 
 function Sidebar({}: ISidebarProps) {
   const { name, surname, email } = useUserStore()
@@ -22,7 +23,11 @@ function Sidebar({}: ISidebarProps) {
     <div className="sidebar">
       <div className="header">
         <div className="logo">
-          <Image src="/images/site/bygamelist-logo-dark.png" alt="Bygamelist logo" />
+          <Image
+            src="/images/site/bygamelist-logo-dark.png"
+            alt="Bygamelist logo"
+            priority
+          />
         </div>
         <div className="user">
           <div className="user-info">
@@ -34,6 +39,12 @@ function Sidebar({}: ISidebarProps) {
           </button>
         </div>
       </div>
+      <div className="body">
+        <nav>
+          <NavigationPages pageType="mainPages" location="header" />
+        </nav>
+      </div>
+      <div className="footer" />
     </div>
   )
 }

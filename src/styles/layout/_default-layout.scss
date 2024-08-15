@@ -1,7 +1,6 @@
 .root-layout {
   display: grid;
-  grid-template-columns: 360px 1fr;
+  grid-template-columns: 320px 1fr;
   min-height: calc(100vh - 80px);
   background-color: var(--gl-body-v1);
-  border-right: 1px solid var(--gl-border-v1);
 }
