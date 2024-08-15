@@ -87,34 +87,34 @@ main {
 }
 
 .MuiTextField-root {
-  background-color: var(--gl-body-v2);
+  background-color: var(--gl-body-v2) !important;
 }
 
 .MuiFormLabel-root {
-  font-family: var(--font-poppins);
-  font-size: 16px;
+  font-family: var(--font-poppins) !important;
+  font-size: 16px !important;
 
   &.Mui-focused {
-    color: var(--gl-subtitle-v1);
+    color: var(--gl-subtitle-v1) !important;
   }
 }
 
 .MuiInputBase-input {
-  font-family: var(--font-poppins);
-  font-size: 16px;
-  letter-spacing: 0.2px;
-  color: var(--gl-body-v5);
+  font-family: var(--font-poppins) !important;
+  font-size: 16px !important;
+  letter-spacing: 0.2px !important;
+  color: var(--gl-body-v5) !important;
 }
 
 .MuiFilledInput-root {
   &::after {
-    border-bottom: 2px solid var(--gl-red-v3);
+    border-bottom: 2px solid var(--gl-red-v3) !important;
   }
 }
 
 .MuiButtonBase-root {
-  font-family: var(--font-poppins);
-  font-size: 16px;
-  font-weight: 400;
-  text-transform: none;
+  font-family: var(--font-poppins) !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
 }
