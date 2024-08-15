@@ -44,10 +44,10 @@
 
 body {
   color: var(--gl-text-v1);
-  background-color: var(--gl-body-v1);
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.041) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.041) 1px, transparent 1px);
-  background-size: 4px 4px;
+  background-color: var(--gl-body-v4);
+  background-image: linear-gradient(to right, black 1px, transparent 1px),
+    linear-gradient(to bottom, black 1px, transparent 1px);
+  background-size: 6px 6px;
 
   &::-webkit-scrollbar {
     width: 10px;

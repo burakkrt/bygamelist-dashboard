@@ -14,11 +14,7 @@ function Button({
 }: IButtonProps) {
   return (
     <MUIButton
-      className={classNames(
-        'base-button',
-        isLoading ? 'isLoading' : 'isLoading',
-        className
-      )}
+      className={classNames('base-button', isLoading && 'isLoading', className)}
       disabled={isLoading}
       {...rest}
     >

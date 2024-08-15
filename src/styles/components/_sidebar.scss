@@ -1,24 +1,51 @@
 .sidebar {
-  padding: 24px 12px;
-  background-color: var(--gl-body-v3);
+  background-color: var(--gl-body-v2);
+  border-left: 1px solid var(--gl-border-v1);
 
-  .profile {
-    padding: 12px;
-    border-radius: 2px;
-    background-color: var(--gl-body-v6);
-    .name {
-      display: block;
+  .header {
+    padding: 20px;
+    background-color: var(--gl-body-v3);
 
-      font-size: 16px;
-      line-height: 22px;
-      font-weight: 700;
-      color: var(--gl-text-v2);
+    .logo {
+      text-align: center;
+      .image-node {
+        width: 100%;
+        max-width: 280px;
+        height: 50px;
+      }
+
+      border-bottom: 1px solid var(--gl-border-v1);
+      padding-bottom: 2px;
+      margin-bottom: 12px;
     }
-    .email {
-      display: block;
-      font-size: 14px;
-      line-height: 18px;
-      color: var(--gl-subtitle-v2);
+
+    .user {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      column-gap: 12px;
+
+      &-info {
+        .name {
+          display: block;
+          font-size: 16px;
+          line-height: 22px;
+          font-weight: 700;
+          color: var(--gl-text-v1);
+        }
+        .email {
+          display: block;
+          font-size: 14px;
+          line-height: 18px;
+          color: var(--gl-subtitle-v1);
+        }
+      }
+
+      .base-icon {
+        font-size: 20px;
+        margin-right: 10px;
+      }
     }
   }
 }

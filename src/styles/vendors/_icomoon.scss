@@ -1,6 +1,7 @@
 $icomoon-font-family: 'bygamelist' !default;
 $icomoon-font-path: '/icomoon' !default;
 
+$icon-log-out: unquote('"\\e916"');
 $icon-spinner: unquote('"\\e915"');
 $icon-sell: unquote('"\\e900"');
 $icon-sword: unquote('"\\e901"');
@@ -51,6 +52,11 @@ i {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-log-out {
+  &:before {
+    content: $icon-log-out;
+  }
+}
 .icon-spinner {
   &:before {
     content: $icon-spinner;
