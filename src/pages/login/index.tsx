@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Container from '@/components/base/container'
-import { Box, Button, TextField } from '@mui/material'
+import { Box, TextField } from '@mui/material'
 import Image from '@/components/base/image'
 import useUserLogin from '@/hooks/useUserLogin'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
+import Button from '@/components/base/button'
 import { IUserLoginFormValues } from './types'
 
 function Page() {
@@ -76,13 +77,12 @@ function Page() {
               value={formValues.password}
               onChange={(e) => hanleChange('password', e.target.value)}
             />
-
             <Button
               type="submit"
               variant="contained"
               size="large"
               className="submit-button"
-              disabled={mutation.isPending}
+              isLoading={mutation.isPending || mutation.isSuccess}
             >
               Giriş Yap
             </Button>

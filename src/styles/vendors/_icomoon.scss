@@ -1,6 +1,7 @@
 $icomoon-font-family: 'bygamelist' !default;
 $icomoon-font-path: '/icomoon' !default;
 
+$icon-spinner: unquote('"\\e915"');
 $icon-sell: unquote('"\\e900"');
 $icon-sword: unquote('"\\e901"');
 $icon-flash: unquote('"\\e902"');
@@ -50,6 +51,11 @@ i {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-spinner {
+  &:before {
+    content: $icon-spinner;
+  }
+}
 .icon-sell {
   &:before {
     content: $icon-sell;

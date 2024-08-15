@@ -1,0 +1,20 @@
+.base-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 6px;
+
+  &.isLoading {
+    padding-left: 42px;
+    padding-right: 42px;
+
+    .base-button .icon-spinner {
+      position: absolute;
+    }
+  }
+
+  &.Mui-disabled {
+    color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}

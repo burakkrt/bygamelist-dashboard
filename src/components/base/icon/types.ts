@@ -20,6 +20,7 @@ export type IconTypes =
   | 'icon-flash'
   | 'icon-sell'
   | 'icon-sword'
+  | 'icon-spinner'
 
 export interface IIconProps extends React.HTMLProps<HTMLElement> {
   name: IconTypes
