@@ -1,3 +1,24 @@
 .sidebar {
   padding: 24px 12px;
+  background-color: var(--gl-body-v3);
+
+  .profile {
+    padding: 12px;
+    border-radius: 2px;
+    background-color: var(--gl-body-v6);
+    .name {
+      display: block;
+
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: 700;
+      color: var(--gl-text-v2);
+    }
+    .email {
+      display: block;
+      font-size: 14px;
+      line-height: 18px;
+      color: var(--gl-subtitle-v2);
+    }
+  }
 }
