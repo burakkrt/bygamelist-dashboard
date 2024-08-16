@@ -20,5 +20,6 @@ export interface IFetcherProps {
   method?: IMethods
   token?: string
   body?: Record<string, unknown>
+  query?: Record<string, any>
   contentType?: IContentTypes
 }

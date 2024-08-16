@@ -1,3 +1,11 @@
+export interface IMeta {
+  page?: number
+  pageSize?: number
+  total?: number
+  totalPages?: number
+  timestamp?: string
+}
+
 export interface IUser {
   id: string
   name: string
@@ -8,7 +16,7 @@ export interface IUser {
 
 export interface IPostUserLogin {
   data: Array<{ token: string; user: IUser }>
-  success: boolean
+  meta: IMeta
 }
 
 export interface ILevel {
@@ -35,20 +43,21 @@ export interface ITeam {
 }
 
 export interface IServer {
-  id: string
-  name: string
-  openingDate: string
+  id?: string
+  name?: string
+  openingDate?: string
   dropClient?: number
   autoHunt?: boolean
+  legalSale?: boolean
   bosses?: Array<IBosses>
   efsunlar?: Array<IEfsunlar>
-  team?: Array<ITeam>
+  team?: ITeam
   createdAt?: string
   updatedAt?: string
-  level: ILevel
+  level?: ILevel
 }
 
 export interface IGetServers {
   data: Array<IServer>
-  success: boolean
+  meta: IMeta
 }

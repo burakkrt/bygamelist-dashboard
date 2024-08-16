@@ -1,0 +1,35 @@
+.pages {
+  width: fit-content;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 4px;
+
+  .page-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 4px;
+    color: var(--gl-subtitle-v1);
+    background-color: var(--gl-body-v3);
+    border: 1px solid var(--gl-border-v1);
+
+    &.active {
+      color: var(--gl-text-v2);
+      background-color: var(--gl-body-v5);
+    }
+  }
+
+  .more-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-width: 14px;
+    .base-icon {
+      font-size: 12px;
+    }
+  }
+}

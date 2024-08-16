@@ -6,6 +6,7 @@ const fetcher = async ({
   token,
   body,
   contentType = 'application/json',
+  query,
 }: IFetcherProps) => {
   const headers: Record<string, string> = {
     'Content-Type': contentType,
@@ -15,8 +16,24 @@ const fetcher = async ({
     headers.Authorization = `Bearer ${token}`
   }
 
+  const queryString = query
+    ? `?${new URLSearchParams(
+        Object.entries(query).reduce(
+          (acc, [key, value]) => {
+            if (value !== undefined && value !== null) {
+              acc[key] = String(value)
+            }
+            return acc
+          },
+          {} as Record<string, string>
+        )
+      ).toString()}`
+    : ''
+
+  const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/${endpoint}${queryString}`
+
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/${endpoint}`, {
+    const response = await fetch(url, {
       method,
       headers,
       body: body ? JSON.stringify(body) : undefined,

@@ -55,7 +55,7 @@ function TokenTimer({}: ITokenTimerProps) {
       <div className="token-timer token-left">
         <span>Token süresi bitti.</span>
         <span>Hiçbir işlem yapamazsın !</span>
-        <Anchor href="/">Tekrar giriş yap</Anchor>
+        <Anchor href="/login">Tekrar giriş yap</Anchor>
       </div>
     )
   }

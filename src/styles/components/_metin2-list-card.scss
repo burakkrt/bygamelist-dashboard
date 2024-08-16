@@ -1,2 +1,17 @@
 .metin2-list-card {
+  .card {
+    display: grid;
+    grid-template-columns: 55px 160px 180px 30px 50px 50px 180px 1fr;
+    gap: 12px;
+    padding: 16px 16px;
+    border-bottom: 1px solid var(--gl-border-v2);
+    color: var(--gl-text-v2);
+    background: #0f2027;
+    background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
+    background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+
+    &:hover {
+      background: linear-gradient(to right, #245468, #405f69, #0f2027);
+    }
+  }
 }
