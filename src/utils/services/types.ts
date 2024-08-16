@@ -17,21 +17,8 @@ export type IMethods = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
 export interface IFetcherProps {
   endpoint: string
-  method: IMethods
+  method?: IMethods
   token?: string
   body?: any
   contentType?: IContentTypes
-}
-
-export interface IUser {
-  id: string
-  name: string
-  surname: string
-  phoneNumber?: string
-  email: string
-}
-
-export interface IPostUserLogin {
-  data: Array<{ token: string; user: IUser }>
-  success: boolean
 }

@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import fetcher from '@/utils/services/fetcher'
 import Cookies from 'js-cookie'
-import { IPostUserLogin } from '@/utils/services/types'
+import { IPostUserLogin } from '@/utils/types'
 
 function useUserLogin() {
   return useMutation({
@@ -15,7 +15,6 @@ function useUserLogin() {
       if (data.data.length > 0) {
         const [res] = data.data
 
-        // Kullanıcı bilgilerini Cookie'lerde saklama
         Cookies.set('userToken', res.token, {
           maxAge: process.env.NEXT_PUBLIC_COKIE_VALIDITY_PERIOD || 3600,
         })

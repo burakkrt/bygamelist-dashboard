@@ -2,7 +2,7 @@ import { IFetcherProps } from './types'
 
 const fetcher = async ({
   endpoint,
-  method,
+  method = 'GET',
   token,
   body,
   contentType = 'application/json',
