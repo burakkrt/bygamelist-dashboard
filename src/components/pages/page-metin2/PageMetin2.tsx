@@ -1,29 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
-import fetcher from '@/utils/services/fetcher'
+import React from 'react'
 import { IGetServers, IServer } from '@/utils/types'
+import fetcher from '@/utils/services/fetcher'
+import { useQuery } from '@tanstack/react-query'
 import { IPageMetin2Props } from './types'
 
 function PageMetin2({}: IPageMetin2Props) {
-  const [servers, setServers] = useState<Array<IServer>>([])
-
-  const mutation = useMutation({
-    mutationFn: () =>
+  const { data, isLoading, error } = useQuery<IGetServers>({
+    queryKey: ['servers'],
+    queryFn: () =>
       fetcher({
         endpoint: 'v1/server',
       }),
-    onSuccess: (data: IGetServers) => {
-      setServers(data.data)
-    },
   })
 
-  useEffect(() => {
-    mutation.mutate()
-  }, [])
+  if (isLoading) return <div>Yükleniyor...</div>
+  if (error) return <div>Hata: {error.message}</div>
 
   return (
     <div>
       <h3>Metin2</h3>
+      {data?.data &&
+        data.data.map((server: IServer) => <div key={server.id}>{server.name}</div>)}
     </div>
   )
 }

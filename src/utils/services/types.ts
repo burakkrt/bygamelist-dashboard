@@ -19,6 +19,6 @@ export interface IFetcherProps {
   endpoint: string
   method?: IMethods
   token?: string
-  body?: any
+  body?: Record<string, unknown>
   contentType?: IContentTypes
 }
