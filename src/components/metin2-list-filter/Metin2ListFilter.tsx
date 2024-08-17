@@ -51,10 +51,6 @@ function Metin2ListFilter({ className }: IMetin2ListFilterProps) {
   )
 
   useEffect(() => {
-    console.log(filterValues)
-  }, [filterValues])
-
-  useEffect(() => {
     const query = new URLSearchParams(window.location.search)
     const id = query.get('id')
     const name = query.get('name')

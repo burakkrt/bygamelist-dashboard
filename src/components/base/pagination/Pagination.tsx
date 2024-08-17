@@ -1,15 +1,17 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import Icon from '@/components/base/icon'
 import { IPaginationProps } from './types'
 
-function Pagination({ totalPages, currentPage = 1, onPageChange }: IPaginationProps) {
+function Pagination({ totalPages }: IPaginationProps) {
+  const [currentPage, setCurrentPage] = useState<number>(1)
+
   const router = useRouter()
 
   const handlePageClick = (pageNumber: number) => {
     if (pageNumber !== currentPage) {
-      onPageChange(pageNumber)
+      setCurrentPage(pageNumber)
       router.replace({
         pathname: router.pathname,
         query: { ...router.query, page: pageNumber },
@@ -35,7 +37,7 @@ function Pagination({ totalPages, currentPage = 1, onPageChange }: IPaginationPr
         query: { ...router.query, page: currentPage },
       })
     } else {
-      onPageChange(pageFromQuery)
+      setCurrentPage(pageFromQuery)
     }
   }, [router.query.page])
 
