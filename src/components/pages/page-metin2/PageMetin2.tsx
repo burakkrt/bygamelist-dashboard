@@ -9,6 +9,7 @@ import { IPageMetin2Props } from './types'
 
 function PageMetin2({}: IPageMetin2Props) {
   const [currentPage, setCurrentPage] = useState<number>(1)
+
   const { data, isLoading, error } = useQuery<IGetServers>({
     queryKey: ['servers', currentPage],
     queryFn: () =>

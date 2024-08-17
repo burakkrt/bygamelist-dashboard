@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import Icon from '@/components/base/icon'
 import { IPaginationProps } from './types'
 
-function Pagination({ totalPages, currentPage, onPageChange }: IPaginationProps) {
-  const handlePageClick = (page: number) => {
-    onPageChange(page)
-  }
+function Pagination({ totalPages, currentPage = 1, onPageChange }: IPaginationProps) {
+  const router = useRouter()
 
+  const handlePageClick = (pageNumber: number) => {
+    if (pageNumber !== currentPage) {
+      onPageChange(pageNumber)
+      router.replace({
+        pathname: router.pathname,
+        query: { ...router.query, page: pageNumber },
+      })
+    }
+  }
   const startPage = Math.max(1, currentPage - 2)
   const endPage = Math.min(totalPages, currentPage + 2)
 
@@ -15,6 +23,11 @@ function Pagination({ totalPages, currentPage, onPageChange }: IPaginationProps)
     { length: endPage - startPage + 1 },
     (_, index) => startPage + index
   )
+
+  useEffect(() => {
+    const pageFromQuery = router.query.page ? Number(router.query.page) : currentPage
+    onPageChange(pageFromQuery)
+  }, [router.query.page])
 
   return (
     <div className="pages">
