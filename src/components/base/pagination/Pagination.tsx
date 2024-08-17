@@ -16,6 +16,7 @@ function Pagination({ totalPages, currentPage = 1, onPageChange }: IPaginationPr
       })
     }
   }
+
   const startPage = Math.max(1, currentPage - 2)
   const endPage = Math.min(totalPages, currentPage + 2)
 
@@ -26,7 +27,16 @@ function Pagination({ totalPages, currentPage = 1, onPageChange }: IPaginationPr
 
   useEffect(() => {
     const pageFromQuery = router.query.page ? Number(router.query.page) : currentPage
-    onPageChange(pageFromQuery)
+
+    // Eğer query'de page yoksa, currentPage'i query'e ekle
+    if (!router.query.page) {
+      router.replace({
+        pathname: router.pathname,
+        query: { ...router.query, page: currentPage },
+      })
+    } else {
+      onPageChange(pageFromQuery)
+    }
   }, [router.query.page])
 
   return (

@@ -1,5 +1,7 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useState, useCallback } from 'react'
+import { useRouter } from 'next/router'
 import classNames from 'classnames'
+import { debounce } from 'lodash'
 import {
   Box,
   FormControlLabel,
@@ -8,31 +10,85 @@ import {
   RadioGroup,
   TextField,
 } from '@mui/material'
-import Button from '@/components/base/button'
+import Icon from '@/components/base/icon'
+import { IMetin2ListFilter, IMetin2ListFilterProps } from './types'
 
-import { IMetin2ListFilterProps } from './types'
+const allowedStatuses = ['all', 'live', 'draft'] as const
 
-function Metin2ListFilter({
-  filterValues,
-  setFilterValues,
-  onSubmit,
-  isSubmitLoading = false,
-  className,
-}: IMetin2ListFilterProps) {
-  const hanleChance = (key: keyof IMetin2ListFilterProps['filterValues'], value: any) => {
+function Metin2ListFilter({ className }: IMetin2ListFilterProps) {
+  const initialFilterValues: IMetin2ListFilter = {
+    id: '',
+    name: '',
+    status: 'all',
+  }
+  const [filterValues, setFilterValues] = useState<IMetin2ListFilter>(initialFilterValues)
+  const router = useRouter()
+
+  const handleChange = (key: keyof IMetin2ListFilter, value: any) => {
     setFilterValues((prev) => ({ ...prev, [key]: value }))
   }
 
+  const handleClear = () => {
+    setFilterValues(initialFilterValues)
+  }
+
+  const debouncedUpdateQuery = useCallback(
+    debounce((updatedValues: IMetin2ListFilter) => {
+      const filteredRoute = Object.fromEntries(
+        Object.entries(updatedValues).filter(([, value]) => value)
+      )
+
+      router.replace(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, ...filteredRoute },
+        },
+        undefined,
+        { shallow: true }
+      )
+    }, 300),
+    []
+  )
+
+  useEffect(() => {
+    console.log(filterValues)
+  }, [filterValues])
+
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search)
+    const id = query.get('id')
+    const name = query.get('name')
+    const status = query.get('status')
+
+    setFilterValues((prev) => ({
+      ...prev,
+      id: typeof id === 'string' ? id : prev.id,
+      name: typeof name === 'string' ? name : prev.name,
+      status:
+        typeof status === 'string' && allowedStatuses.includes(status as any)
+          ? (status as IMetin2ListFilter['status'])
+          : prev.status,
+    }))
+  }, [])
+
+  useEffect(() => {
+    debouncedUpdateQuery(filterValues)
+
+    return () => {
+      debouncedUpdateQuery.cancel()
+    }
+  }, [filterValues, debouncedUpdateQuery])
+
   return (
     <div className={classNames('metin2-list-filter', className)}>
-      <Box component="form" className="filter-form" onSubmit={onSubmit}>
+      <Box component="div" className="filter-form">
         <TextField
           label="Sunucu adı"
           variant="filled"
           className="server-name"
           autoComplete="off"
           value={filterValues.name}
-          onChange={(e) => hanleChance('name', e.target.value)}
+          onChange={(e) => handleChange('name', e.target.value)}
         />
         <TextField
           label="Sunucu Id"
@@ -40,7 +96,7 @@ function Metin2ListFilter({
           className="server-id"
           autoComplete="off"
           value={filterValues.id}
-          onChange={(e) => hanleChance('id', e.target.value)}
+          onChange={(e) => handleChange('id', e.target.value)}
         />
         <div className="status">
           <FormLabel id="server-status">Sunucu Durumu</FormLabel>
@@ -49,21 +105,18 @@ function Metin2ListFilter({
             name="server-status"
             className="filter-radio-group"
             value={filterValues.status}
-            onChange={(e) => hanleChance('status', e.target.value)}
+            onChange={(e) => handleChange('status', e.target.value)}
           >
             <FormControlLabel value="all" control={<Radio />} label="Hepsi" />
             <FormControlLabel value="live" control={<Radio />} label="Yayında" />
             <FormControlLabel value="draft" control={<Radio />} label="Taslak" />
           </RadioGroup>
         </div>
-        <Button
-          type="submit"
-          variant="contained"
-          className="filter-submit-btn"
-          disabled={isSubmitLoading}
-        >
-          Filtrele
-        </Button>
+        {JSON.stringify(filterValues) !== JSON.stringify(initialFilterValues) && (
+          <button type="button" className="clear-btn" onClick={handleClear}>
+            <Icon name="icon-clear" />
+          </button>
+        )}
       </Box>
     </div>
   )
