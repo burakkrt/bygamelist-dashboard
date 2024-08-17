@@ -25,7 +25,6 @@ function PageMetin2({}: IPageMetin2Props) {
     <div className="page-metin2">
       <div className="server-list">
         <Metin2ListFilter />
-        <span className="total-info">Toplam {data?.meta?.total} sunucu</span>
         <div className="list">
           {isLoading && <Spinner size={64} />}
           {error && <span>{error.message}</span>}
@@ -33,6 +32,7 @@ function PageMetin2({}: IPageMetin2Props) {
             data.data.map((server: IServer) => (
               <Metin2ListCard key={server.id} data={server} />
             ))}
+          {data && <span className="total-info">Toplam {data?.meta?.total} sunucu</span>}
         </div>
         <div className="pagination">
           {data?.meta?.totalPages && (

@@ -2,15 +2,22 @@
   padding: 16px;
 
   .server-list {
-    .list {
+    .metin2-list-filter {
+      margin-bottom: 16px;
     }
 
-    .total-info {
-      display: block;
-      text-align: end;
-      padding-top: 2px;
-      font-weight: 500;
-      color: var(--gl-subtitle-v1);
+    .list {
+      position: relative;
+      .total-info {
+        position: absolute;
+        transform: translateY(100%);
+        bottom: -4px;
+        right: 2px;
+        text-align: end;
+        padding-top: 2px;
+        font-weight: 500;
+        color: var(--gl-subtitle-v1);
+      }
     }
 
     .pagination {
