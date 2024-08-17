@@ -41,7 +41,7 @@ function Metin2ListFilter({ className }: IMetin2ListFilterProps) {
       router.replace(
         {
           pathname: router.pathname,
-          query: { ...router.query, ...filteredRoute },
+          query: { ...router.query, ...filteredRoute, page: 1 },
         },
         undefined,
         { shallow: true }
