@@ -39,7 +39,7 @@ function Pagination({ totalPages = 0 }: IPaginationProps) {
     }
   }, [router.query.page])
 
-  if (!totalPages || totalPages <= 0) {
+  if (!totalPages || totalPages <= 1) {
     return null
   }
 
