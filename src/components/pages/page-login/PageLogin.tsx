@@ -36,7 +36,7 @@ function PageLogin({}: IPageLoginProps) {
     }
   }, [mutation.error, mutation.isSuccess, mutation.isError, router])
 
-  const hanleChange = (key: keyof IUserLoginFormValues, value: any) => {
+  const handleChange = (key: keyof IUserLoginFormValues, value: any) => {
     setFormValues((prev) => ({ ...prev, [key]: value }))
   }
 
@@ -54,29 +54,32 @@ function PageLogin({}: IPageLoginProps) {
             </div>
             <h1 className="title">Kullanıcı Girişi</h1>
           </div>
-          <Box
-            component="form"
-            onSubmit={onSubmit}
-            className="user-login-form"
-            autoComplete="on"
-          >
+          <Box component="form" onSubmit={onSubmit} className="user-login-form">
             <TextField
               type="email"
               className="form-item"
               label="E-Mail"
               variant="filled"
               required
+              autoComplete="email"
               value={formValues.email}
-              onChange={(e) => hanleChange('email', e.target.value)}
+              onChange={(e) => handleChange('email', e.target.value)}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
             <TextField
               type="password"
               className="form-item"
               label="Şifre"
               variant="filled"
+              autoComplete="current-password"
               required
               value={formValues.password}
-              onChange={(e) => hanleChange('password', e.target.value)}
+              onChange={(e) => handleChange('password', e.target.value)}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
             <Button
               type="submit"
