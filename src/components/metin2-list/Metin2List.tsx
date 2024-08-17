@@ -7,6 +7,7 @@ import fetcher from '@/utils/services/fetcher'
 import Metin2ListCard from '@/components/metin2-list-card'
 import Pagination from '@/components/base/pagination'
 import Spinner from '@/components/base/spinner'
+import Metin2ListFilter from '@/components/metin2-list-filter'
 import { IMetin2ListProps } from './types'
 
 function Metin2List({}: IMetin2ListProps) {
@@ -37,6 +38,7 @@ function Metin2List({}: IMetin2ListProps) {
 
   return (
     <div className="metin2-list">
+      <Metin2ListFilter />
       <div className="list">
         {data.data.map((server: IServer) => (
           <Metin2ListCard key={server.id} data={server} />
