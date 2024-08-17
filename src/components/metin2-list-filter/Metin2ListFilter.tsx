@@ -13,7 +13,7 @@ import {
 import Icon from '@/components/base/icon'
 import { IMetin2ListFilter, IMetin2ListFilterProps } from './types'
 
-const allowedStatuses = ['all', 'live', 'draft'] as const
+const allowedStatuses = ['all', 'true', 'false'] as const
 
 function Metin2ListFilter({ className }: IMetin2ListFilterProps) {
   const initialFilterValues: IMetin2ListFilter = {
@@ -104,8 +104,8 @@ function Metin2ListFilter({ className }: IMetin2ListFilterProps) {
             onChange={(e) => handleChange('status', e.target.value)}
           >
             <FormControlLabel value="all" control={<Radio />} label="Hepsi" />
-            <FormControlLabel value="live" control={<Radio />} label="Yayında" />
-            <FormControlLabel value="draft" control={<Radio />} label="Taslak" />
+            <FormControlLabel value="true" control={<Radio />} label="Yayında" />
+            <FormControlLabel value="false" control={<Radio />} label="Taslak" />
           </RadioGroup>
         </div>
         {JSON.stringify(filterValues) !== JSON.stringify(initialFilterValues) && (
