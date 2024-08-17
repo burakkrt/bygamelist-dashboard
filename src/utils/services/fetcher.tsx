@@ -13,7 +13,11 @@ const fetcher = async ({
   }
 
   if (token) {
-    headers.Authorization = `Bearer ${token}`
+    if (token.startsWith('Berarer')) {
+      headers.Authorization = `${token}`
+    } else {
+      headers.Authorization = `Bearer ${token}`
+    }
   }
 
   const queryString = query
