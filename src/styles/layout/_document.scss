@@ -86,9 +86,9 @@ main {
     sans-serif;
 }
 
-.MuiTextField-root {
-  background-color: var(--gl-body-v2) !important;
-}
+// .MuiTextField-root {
+//   background-color: var(--gl-body-v2) !important;
+// }
 
 .MuiFormLabel-root {
   font-family: var(--font-poppins) !important;
@@ -104,11 +104,12 @@ main {
   font-size: 16px !important;
   letter-spacing: 0.2px !important;
   color: var(--gl-body-v5) !important;
+  background-color: var(--gl-body-v3) !important;
 }
 
 .MuiFilledInput-root {
   &::after {
-    border-bottom: 2px solid var(--gl-red-v3) !important;
+    border-bottom: 2px solid var(--gl-blue-v3) !important;
   }
 }
 
@@ -117,4 +118,21 @@ main {
   font-size: 16px !important;
   font-weight: 400 !important;
   text-transform: none !important;
+}
+
+.MuiFormControlLabel-root {
+  .MuiRadio-root {
+    font-size: 32px !important;
+    padding: 6px !important;
+
+    .MuiSvgIcon-root {
+      font-size: 18px !important;
+    }
+  }
+
+  .MuiTypography-root {
+    font-size: 16px !important;
+    font-family: var(--font-poppins) !important;
+    letter-spacing: 0px !important;
+  }
 }

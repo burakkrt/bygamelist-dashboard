@@ -1,0 +1,30 @@
+.metin2-list-filter {
+  .filter-form {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+
+    .server-name {
+      .MuiInputBase-input {
+        width: 170px;
+      }
+    }
+
+    .server-id {
+      .MuiInputBase-input {
+        width: 240px;
+      }
+    }
+
+    .status {
+      .filter-radio-group {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+
+    .filter-submit-btn {
+      background-color: var(--gl-body-v5);
+    }
+  }
+}

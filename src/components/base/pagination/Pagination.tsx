@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import Icon from '@/components/base/icon'
@@ -72,4 +72,4 @@ function Pagination({ totalPages, currentPage = 1, onPageChange }: IPaginationPr
   )
 }
 
-export default Pagination
+export default memo(Pagination)
