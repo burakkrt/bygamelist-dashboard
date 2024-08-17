@@ -28,23 +28,22 @@ function Metin2List({}: IMetin2ListProps) {
   if (isLoading) return <Spinner size={64} />
   if (error) return <span>{error.message}</span>
 
-  if (!data?.data || data.data.length === 0) {
-    return (
-      <div className="metin2-list not-found">
-        <span className="not-found-text">Aradığınız kriterde sunucu bulunamadı.</span>
-      </div>
-    )
-  }
-
   return (
     <div className="metin2-list">
       <Metin2ListFilter />
-      <div className="list">
-        {data.data.map((server: IServer) => (
-          <Metin2ListCard key={server.id} data={server} />
-        ))}
-        <span className="total-info">Toplam {data.meta.total} sunucu</span>
-      </div>
+      {!data?.data || data.data.length === 0 ? (
+        <div className="metin2-list not-found">
+          <span className="not-found-text">Aradığınız kriterde sunucu bulunamadı.</span>
+        </div>
+      ) : (
+        <div className="list">
+          {data.data.map((server: IServer) => (
+            <Metin2ListCard key={server.id} data={server} />
+          ))}
+          <span className="total-info">Toplam {data.meta.total} sunucu</span>
+        </div>
+      )}
+
       <div className="pagination">
         <Pagination totalPages={data.meta.totalPages || 0} />
       </div>
