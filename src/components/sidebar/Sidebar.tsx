@@ -1,7 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
-import { toast } from 'react-toastify'
 import useUserStore from '@/store/useStore'
 import Image from '../base/image'
 import Icon from '../base/icon'
@@ -15,8 +14,7 @@ function Sidebar({}: ISidebarProps) {
   const hanleLogout = () => {
     Cookies.remove('userInfo')
     Cookies.remove('userToken')
-    router.push('/login')
-    toast.success('Çıkış yapıldı.')
+    router.reload()
   }
 
   return (
