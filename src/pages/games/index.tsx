@@ -1,7 +1,9 @@
-import PageGames from '@/components/pages/page-games'
-
 function Page() {
-  return <PageGames />
+  return (
+    <div className="page-games">
+      <h3>Oyunlar</h3>
+    </div>
+  )
 }
 
 export default Page

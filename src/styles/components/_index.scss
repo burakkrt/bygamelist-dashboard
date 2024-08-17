@@ -1,12 +1,18 @@
+@forward 'page-metin2';
+@forward 'page-games';
+@forward 'page-metin2-add-server';
+@forward 'page-metin2-server';
+@forward 'page-metin2-publish-server';
+@forward 'page-welcome';
+@forward 'page-login';
+
 @forward 'base';
 @forward 'footer';
 @forward 'welcome-hero';
 @forward 'sidebar';
-@forward 'user-login-singup';
 @forward 'navigation-pages';
 @forward 'token-timer';
 @forward 'metin2-list-card';
-@forward 'page-metin2';
 @forward 'metin2-list-filter';
 @forward 'metin2-list';
-@forward 'page-metin2-add-server';
+@forward 'user-login';

@@ -1,7 +1,9 @@
-import PageMetin2AddServer from '@/components/pages/page-metin2-add-server'
-
 function Page() {
-  return <PageMetin2AddServer />
+  return (
+    <div className="page-metin2-add-server">
+      <h3>Metin2 sunucu ekle</h3>
+    </div>
+  )
 }
 
 export default Page

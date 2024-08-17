@@ -1,9 +1,12 @@
+import UserLogin from '@/components/user-login'
 import React from 'react'
 
-import PageLogin from '@/components/pages/page-login'
-
 function Page() {
-  return <PageLogin />
+  return (
+    <div className="page-login">
+      <UserLogin />
+    </div>
+  )
 }
 
 export default Page

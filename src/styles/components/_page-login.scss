@@ -1,0 +1,12 @@
+.page-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--gl-text-v2);
+  background-color: var(--gl-body-v4);
+  background-image: linear-gradient(to right, black 1px, transparent 1px),
+    linear-gradient(to bottom, black 1px, transparent 1px);
+  background-size: 6px 6px;
+}

@@ -1,7 +1,9 @@
-import PageMetin2PublishServer from '@/components/pages/page-metin2-publish-server'
-
 function Page() {
-  return <PageMetin2PublishServer />
+  return (
+    <div className="page-metin2-publish-server">
+      <h3>Metin2 sunucu yayınla</h3>
+    </div>
+  )
 }
 
 export default Page
