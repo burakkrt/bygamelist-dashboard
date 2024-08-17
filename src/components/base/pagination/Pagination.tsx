@@ -4,9 +4,8 @@ import classNames from 'classnames'
 import Icon from '@/components/base/icon'
 import { IPaginationProps } from './types'
 
-function Pagination({ totalPages }: IPaginationProps) {
+function Pagination({ totalPages = 0 }: IPaginationProps) {
   const [currentPage, setCurrentPage] = useState<number>(1)
-
   const router = useRouter()
 
   const handlePageClick = (pageNumber: number) => {
@@ -30,7 +29,6 @@ function Pagination({ totalPages }: IPaginationProps) {
   useEffect(() => {
     const pageFromQuery = router.query.page ? Number(router.query.page) : currentPage
 
-    // Eğer query'de page yoksa, currentPage'i query'e ekle
     if (!router.query.page) {
       router.replace({
         pathname: router.pathname,
@@ -40,6 +38,10 @@ function Pagination({ totalPages }: IPaginationProps) {
       setCurrentPage(pageFromQuery)
     }
   }, [router.query.page])
+
+  if (!totalPages || totalPages <= 0) {
+    return null
+  }
 
   return (
     <div className="pages">

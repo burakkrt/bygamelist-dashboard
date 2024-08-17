@@ -1,0 +1,33 @@
+.metin2-list {
+  .list {
+    position: relative;
+    .total-info {
+      position: absolute;
+      transform: translateY(100%);
+      bottom: -4px;
+      right: 2px;
+      text-align: end;
+      padding-top: 2px;
+      font-weight: 500;
+      color: var(--gl-subtitle-v1);
+    }
+  }
+
+  .pagination {
+    margin-top: 16px;
+  }
+
+  &.not-found {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .not-found-text {
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--gl-subtitle-v1);
+      opacity: 0.6;
+    }
+  }
+}
