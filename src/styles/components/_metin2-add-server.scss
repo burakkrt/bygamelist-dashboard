@@ -1,0 +1,23 @@
+.metin2-add-server {
+  .title {
+    display: block;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .create-server-form {
+    & > div {
+      margin-bottom: 16px;
+    }
+  }
+
+  .opening-time {
+    .label-text {
+      display: block;
+      color: var(--gl-subtitle-v1);
+      opacity: 0.8;
+      margin-bottom: 4px;
+    }
+  }
+}

@@ -87,16 +87,72 @@ main {
     sans-serif;
 }
 
-// .MuiTextField-root {
-//   background-color: var(--gl-body-v2) !important;
-// }
+.react-datepicker {
+  .react-datepicker__header {
+    padding-top: 4px;
+    .react-datepicker__current-month {
+      font-size: 16px;
+      font-weight: 400;
+      margin-bottom: 1px;
+    }
+
+    .react-datepicker__day-names {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      margin-bottom: -6px;
+      .react-datepicker__day-name {
+        font-size: 12px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .react-datepicker__navigation-icon {
+    &::before {
+      top: 10px;
+    }
+  }
+
+  .openingdate-popup-day {
+    font-size: 14px;
+    line-height: 28px;
+    margin: 1px;
+    width: 28px;
+    height: 28px;
+    user-select: none;
+  }
+
+  .react-datepicker__input-time-container {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 8px 24px;
+    text-align: center;
+    background-color: var(--gl-body-v3);
+
+    .react-datepicker-time__caption {
+      font-size: 16px;
+    }
+
+    .react-datepicker-time__input {
+      margin-left: 2px;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 0 2px 0 6px;
+    }
+  }
+}
 
 .MuiFormLabel-root {
   font-family: var(--font-poppins) !important;
   font-size: 16px !important;
 
+  &.MuiInputLabel-shrink,
   &.Mui-focused {
-    color: var(--gl-subtitle-v1) !important;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    color: var(--gl-green-v1);
   }
 }
 
@@ -136,4 +192,10 @@ main {
     font-family: var(--font-poppins) !important;
     letter-spacing: 0px !important;
   }
+}
+
+.MuiSelect-select {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
 }

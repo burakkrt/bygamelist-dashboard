@@ -14,11 +14,6 @@ export interface IUser {
   email: string
 }
 
-export interface IPostUserLogin {
-  data: Array<{ token: string; user: IUser }>
-  meta: IMeta
-}
-
 export interface ILevel {
   id?: string
   name: string
@@ -30,8 +25,9 @@ export interface IBosses {
 }
 
 export interface IEfsunlar {
-  owner?: string
+  id?: string
   name: string
+  description?: string
 }
 
 export interface ITeam {
@@ -57,7 +53,28 @@ export interface IServer {
   level?: ILevel
 }
 
+// FETCHER RESPONSE TYPES
 export interface IGetServers {
   data: Array<IServer>
+  meta: IMeta
+}
+
+export interface IPostUserLogin {
+  data: Array<{ token: string; user: IUser }>
+  meta: IMeta
+}
+
+export interface IGetLevels {
+  data: Array<ILevel>
+  meta: IMeta
+}
+
+export interface IGetEfsunlar {
+  data: Array<IEfsunlar>
+  meta: IMeta
+}
+
+export interface IGetBosses {
+  data: Array<IBosses>
   meta: IMeta
 }
