@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import moment from 'moment'
 import { toast } from 'react-toastify'
 import DatePicker from 'react-datepicker'
 import { tr } from 'date-fns/locale'
 import classNames from 'classnames'
 import Grid from '@mui/material/Unstable_Grid2'
 import useUserStore from '@/store/useStore'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import fetcher from '@/utils/services/fetcher'
 import Button from '@/components/base/button'
 import Icon from '@/components/base/icon'
@@ -21,10 +22,10 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
     level: '',
     autoHunt: false,
     dropClient: 1,
-    openingDate: undefined,
+    openingDate: '',
     autoBoss: undefined,
     battlepass: undefined,
-    legalSale: undefined,
+    legalSale: false,
     dolunayKdp: undefined,
     simya: undefined,
     kuleFarm: undefined,
@@ -37,7 +38,7 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
   }
   const [formValues, setFormValues] =
     useState<IFormValuesAddServerFrom>(initialFormValues)
-  const { id } = useUserStore()
+  const { id, token: userToken } = useUserStore()
 
   const levels = useQuery<IGetLevels>({
     queryKey: ['level'],
@@ -61,6 +62,29 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
       fetcher({
         endpoint: 'v1/boss',
       }),
+  })
+
+  const createServer = useMutation({
+    mutationFn: () =>
+      fetcher({
+        endpoint: 'v1/server222222222222222222222222222222222222222222222222222222',
+        method: 'POST',
+        token: userToken,
+        body: {
+          ...formValues,
+          openingDate: moment(formValues.openingDate).format(),
+        },
+      }),
+    onSuccess: (data) => {
+      setFormValues({ ...initialFormValues, userId: id })
+      toast.success(
+        `Sunucu oluşturuldu ve ${data.data[0].status ? 'Yayınlandı.' : 'Taslak olarak kaydedildi'}`
+      )
+    },
+    onError: (err) => {
+      toast.error('Sunucu oluşturulamadı.')
+      console.log(err)
+    },
   })
 
   const handleChange = (key: keyof IFormValuesAddServerFrom, value: any) => {
@@ -104,8 +128,7 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
-    setFormValues({ ...initialFormValues, userId: id })
-    toast.success('Sunucu başarılı bir şekilde oluşturuldu.')
+    createServer.mutate()
   }
 
   useEffect(() => {
@@ -168,15 +191,58 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
                           onChange={(e) =>
                             parseBooleanhandleChange('status', e.target.value)
                           }
-                          className={classNames(isValueEmpty('status'))}
+                          className={classNames(isValueEmpty('autoHunt'))}
                         >
                           <MenuItem value="true">Yayınla</MenuItem>
                           <MenuItem value="false">Taslak olarak kaydet</MenuItem>
                         </Select>
                       </FormControl>
                     </Grid>
-                    {/* oto av */}
+                    {/* drop client */}
                     <Grid xs={12}>
+                      <FormControl fullWidth>
+                        <InputLabel id="dropClient-select-label">
+                          Drop Client *
+                        </InputLabel>
+                        <Select
+                          labelId="dropClient-select-label"
+                          value={formValues.dropClient || ''}
+                          variant="filled"
+                          label="Drop Client"
+                          required
+                          onChange={(e) => handleChange('dropClient', e.target.value)}
+                          className={classNames(isValueEmpty('dropClient'))}
+                        >
+                          <MenuItem value={1}>1 Client</MenuItem>
+                          <MenuItem value={2}>2 Client</MenuItem>
+                          <MenuItem value={3}>3 Client</MenuItem>
+                          <MenuItem value={3}>4 Client</MenuItem>
+                          <MenuItem value={3}>5 Client</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    {/* legal satış */}
+                    <Grid xs={6}>
+                      <FormControl fullWidth>
+                        <InputLabel id="legalSale-select-label">Legal Satış *</InputLabel>
+                        <Select
+                          labelId="legalSale-select-label"
+                          value={String(formValues.legalSale) || ''}
+                          variant="filled"
+                          label="Legal Satış"
+                          required
+                          onChange={(e) =>
+                            parseBooleanhandleChange('legalSale', e.target.value)
+                          }
+                          className={classNames(isValueEmpty('legalSale'))}
+                        >
+                          <MenuItem value="true">Var</MenuItem>
+                          <MenuItem value="false">Yok</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    {/* oto av */}
+                    <Grid xs={6}>
                       <FormControl fullWidth>
                         <InputLabel id="autoHunt-select-label">Oto av *</InputLabel>
                         <Select
@@ -219,29 +285,6 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
                         </Select>
                       </FormControl>
                     </Grid>
-                    {/* drop client */}
-                    <Grid xs={12}>
-                      <FormControl fullWidth>
-                        <InputLabel id="dropClient-select-label">
-                          Drop Client *
-                        </InputLabel>
-                        <Select
-                          labelId="dropClient-select-label"
-                          value={formValues.dropClient || ''}
-                          variant="filled"
-                          label="Drop Client"
-                          required
-                          onChange={(e) => handleChange('dropClient', e.target.value)}
-                          className={classNames(isValueEmpty('dropClient'))}
-                        >
-                          <MenuItem value={1}>1 Client</MenuItem>
-                          <MenuItem value={2}>2 Client</MenuItem>
-                          <MenuItem value={3}>3 Client</MenuItem>
-                          <MenuItem value={3}>4 Client</MenuItem>
-                          <MenuItem value={3}>5 Client</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Grid>
                   </Grid>
                 </div>
               </Grid>
@@ -263,9 +306,13 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
                       isClearable
                       inline
                       required
-                      selected={formValues.openingDate}
+                      selected={
+                        formValues.openingDate !== ''
+                          ? moment(formValues.openingDate).toDate()
+                          : null
+                      }
                       onChange={(date) => {
-                        handleChange('openingDate', date)
+                        handleChange('openingDate', moment(date).toISOString())
                       }}
                     />
                   </div>
@@ -329,26 +376,6 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
                   >
                     <MenuItem value="true">Var</MenuItem>
                     <MenuItem value="false">Yok</MenuItem>
-                    <MenuItem value="undefined">Bilinmiyor</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              {/* legal satış */}
-              <Grid xs={6}>
-                <FormControl fullWidth>
-                  <InputLabel id="legalSale-select-label">Legal Satış</InputLabel>
-                  <Select
-                    labelId="legalSale-select-label"
-                    value={String(formValues.legalSale) || ''}
-                    variant="filled"
-                    label="Legal Satış"
-                    onChange={(e) =>
-                      parseBooleanhandleChange('legalSale', e.target.value)
-                    }
-                    className={classNames(isValueEmpty('legalSale'))}
-                  >
-                    <MenuItem value="true">İzin veriliyor</MenuItem>
-                    <MenuItem value="false">Yasak</MenuItem>
                     <MenuItem value="undefined">Bilinmiyor</MenuItem>
                   </Select>
                 </FormControl>
@@ -509,7 +536,7 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
                     className="submit-btn"
                   >
                     <Icon name="icon-checkmark" />
-                    <span>Oluştur</span>
+                    <span>Sunucuyu Oluştur</span>
                   </Button>
                   <Button
                     type="button"

@@ -1,12 +1,10 @@
 import React from 'react'
 import moment from 'moment'
-import 'moment/locale/tr'
 import Anchor from '@/components/base/anchor'
 
 import { IMetin2ListCardProps } from './types'
 
 function Metin2ListCard({ data }: IMetin2ListCardProps) {
-  moment.locale('tr')
   const { id, name, autoHunt, dropClient, legalSale, level, openingDate, team } = data
   return (
     <div className="metin2-list-card">
@@ -20,7 +18,7 @@ function Metin2ListCard({ data }: IMetin2ListCardProps) {
         <span className="auto-hunt">{autoHunt ? 'Evet' : 'Hayır'}</span>
         <span className="legal-sale">{legalSale ? 'Evet' : 'Hayır'}</span>
         <span className="date">
-          {moment.utc(openingDate).format('DD MMMM YYYY HH:mm')}
+          {moment.utc(openingDate).local().format('DD MMMM YYYY HH:mm')}
         </span>
         <span className="id">{id}</span>
       </Anchor>

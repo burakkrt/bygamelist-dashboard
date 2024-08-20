@@ -3,12 +3,12 @@ export interface IFormValuesAddServerFrom {
   status: boolean
   name: string
   level: string
-  openingDate: Date | undefined
+  openingDate: string
   autoHunt: boolean
+  legalSale: boolean
   dropClient: number
   autoBoss?: boolean
   battlepass?: boolean
-  legalSale?: boolean
   dolunayKdp?: boolean
   simya?: boolean
   kuleFarm?: boolean

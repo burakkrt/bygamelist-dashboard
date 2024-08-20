@@ -45,7 +45,7 @@ function Metin2List({}: IMetin2ListProps) {
       )}
 
       <div className="pagination">
-        <Pagination totalPages={data.meta.totalPages || 0} />
+        <Pagination totalPages={data?.meta?.totalPages || 0} />
       </div>
     </div>
   )
