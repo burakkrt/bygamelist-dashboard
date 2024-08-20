@@ -118,9 +118,13 @@ main {
     font-size: 14px;
     line-height: 28px;
     margin: 1px;
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     user-select: none;
+
+    &.react-datepicker__day--selected {
+      background-color: var(--gl-green-v3);
+    }
   }
 
   .react-datepicker__input-time-container {
@@ -138,8 +142,12 @@ main {
     .react-datepicker-time__input {
       margin-left: 2px;
       font-size: 16px;
-      font-weight: 500;
       padding: 0 2px 0 6px;
+
+      .react-datepicker-time__input {
+        background-color: var(--gl-body-v2);
+        border: 1px solid var(--gl-border-v1);
+      }
     }
   }
 }

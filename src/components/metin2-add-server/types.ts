@@ -1,4 +1,4 @@
-export interface IFormValuesAddUser {
+export interface IFormValuesAddServerFrom {
   userId: string
   status: boolean
   name: string

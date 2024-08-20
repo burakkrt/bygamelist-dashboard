@@ -6,18 +6,37 @@
   }
 
   .create-server-form {
+    position: relative;
+
     & > div {
       margin-bottom: 16px;
+    }
+
+    .form-action-buttons {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+      column-gap: 12px;
+      padding: 16px 0;
+
+      .clear-btn {
+        position: absolute;
+        top: 8px;
+        right: 0;
+        padding: 6px 12px;
+        min-width: fit-content;
+        width: 38px;
+        height: 38px;
+        span {
+          font-size: 14px;
+        }
+      }
     }
   }
 
   .opening-time {
-    .label-text {
-      display: block;
-      color: var(--gl-subtitle-v1);
-      opacity: 0.8;
-      margin-bottom: 4px;
-    }
+    text-align: end;
   }
 
   .rules {
@@ -36,6 +55,30 @@
         border: 1px solid var(--gl-border-v1);
         color: var(--gl-subtitle-v1);
         background-color: var(--gl-body-v2);
+      }
+    }
+  }
+
+  .MuiInputBase-root,
+  .MuiFormControl-root {
+    -webkit-text-fill-color: var(--gl-subtitle-v1) !important;
+    background-color: transparent;
+
+    input,
+    .MuiSelect-select {
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      background: var(--gl-body-v1);
+      background: -webkit-linear-gradient(0deg, var(--gl-body-v3), var(--gl-body-v3));
+      background: linear-gradient(0deg, var(--gl-body-v3), var(--gl-body-v3));
+    }
+
+    &.not-empty {
+      input,
+      .MuiSelect-select {
+        background: #b2ff9473;
+        background: -webkit-linear-gradient(0deg, #b2ff9473, #ecffe5);
+        background: linear-gradient(0deg, #b2ff9473, #ecffe5);
       }
     }
   }
