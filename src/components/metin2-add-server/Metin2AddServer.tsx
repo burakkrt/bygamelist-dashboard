@@ -67,7 +67,7 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
   const createServer = useMutation({
     mutationFn: () =>
       fetcher({
-        endpoint: 'v1/server222222222222222222222222222222222222222222222222222222',
+        endpoint: 'v1/server',
         method: 'POST',
         token: userToken,
         body: {
@@ -82,7 +82,7 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
       )
     },
     onError: (err) => {
-      toast.error('Sunucu oluşturulamadı.')
+      toast.error(err.message)
       console.log(err)
     },
   })
@@ -534,8 +534,14 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
                     variant="contained"
                     color="success"
                     className="submit-btn"
+                    disabled={createServer.isPending}
                   >
-                    <Icon name="icon-checkmark" />
+                    {createServer.isPending ? (
+                      <Icon name="icon-spinner" />
+                    ) : (
+                      <Icon name="icon-checkmark" />
+                    )}
+
                     <span>Sunucuyu Oluştur</span>
                   </Button>
                   <Button

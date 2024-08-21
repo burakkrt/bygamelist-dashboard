@@ -45,7 +45,9 @@ const fetcher = async ({
 
     if (!response.ok) {
       const errorData = await response.json()
-      const errorMessage = errorData?.error?.message || 'Bilinmeyen bir hata oluştu.'
+      const errorMessage =
+        errorData?.error?.message ||
+        'Bilinmeyen bir hata oluştu. Lütfen konsolu kontrol edin.'
       throw new Error(errorMessage)
     }
 
