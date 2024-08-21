@@ -1,7 +1,9 @@
+import PageTitle from '@/components/page-title'
+
 function Page() {
   return (
     <div className="page-games">
-      <h3>Oyunlar</h3>
+      <PageTitle>Oyunlar</PageTitle>
     </div>
   )
 }
