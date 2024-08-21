@@ -1,16 +1,17 @@
-import React, { memo } from 'react'
-import { useRouter } from 'next/router'
+import React from 'react'
 import { useQuery, keepPreviousData } from '@tanstack/react-query'
-import useUserStore from '@/store/useStore'
 import { IGetServers, IServer } from '@/utils/types'
 import fetcher from '@/utils/services/fetcher'
+import useUserStore from '@/store/useStore'
+import { useRouter } from 'next/router'
+import Spinner from '@/components/base/spinner'
 import Metin2ListCard from '@/components/metin2-list-card'
 import Pagination from '@/components/base/pagination'
-import Spinner from '@/components/base/spinner'
-import Metin2ListFilter from '@/components/metin2-list-filter'
-import { IMetin2ListProps } from './types'
+import Metin2DraftListFilter from '@/components/metin2-draft-list-filter'
 
-function Metin2List({}: IMetin2ListProps) {
+import { IMetin2DraftListProps } from './types'
+
+function Metin2DraftList({}: IMetin2DraftListProps) {
   const router = useRouter()
   const { token } = useUserStore()
 
@@ -28,21 +29,21 @@ function Metin2List({}: IMetin2ListProps) {
   const renderContent = () => {
     if (isLoading)
       return (
-        <div className="metin2-list not-found">
+        <div className="metin2-draft-list not-found">
           <Spinner size={64} />
         </div>
       )
 
     if (error)
       return (
-        <div className="metin2-list not-found">
+        <div className="metin2-draft-list not-found">
           <span className="not-found-text">{error.message}</span>
         </div>
       )
 
     if (!data?.data || data.data.length === 0) {
       return (
-        <div className="metin2-list not-found">
+        <div className="metin2-draft-list not-found">
           <span className="not-found-text">Aradığınız kriterde sunucu bulunamadı.</span>
         </div>
       )
@@ -59,8 +60,8 @@ function Metin2List({}: IMetin2ListProps) {
   }
 
   return (
-    <div className="metin2-list">
-      <Metin2ListFilter />
+    <div className="metin2-draft-list">
+      <Metin2DraftListFilter />
       {renderContent()}
       <div className="pagination">
         <Pagination totalPages={data?.meta?.totalPages || 0} />
@@ -69,4 +70,4 @@ function Metin2List({}: IMetin2ListProps) {
   )
 }
 
-export default memo(Metin2List)
+export default Metin2DraftList

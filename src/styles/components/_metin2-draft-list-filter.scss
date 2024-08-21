@@ -1,0 +1,41 @@
+.metin2-draft-list-filter {
+  .filter-form {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+
+    .server-name {
+      .MuiInputBase-input {
+        width: 170px;
+      }
+    }
+
+    .server-id {
+      .MuiInputBase-input {
+        width: 240px;
+      }
+    }
+
+    .status {
+      .filter-radio-group {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+
+    .clear-btn {
+      width: fit-content;
+      height: fit-content;
+      margin: auto 0;
+      padding: 10px 12px 10px 10px;
+      border-radius: 4px;
+      font-size: 15px;
+      color: var(--gl-text-v2);
+      background-color: var(--gl-red-v1);
+
+      .base-icon {
+        font-size: 18px;
+      }
+    }
+  }
+}

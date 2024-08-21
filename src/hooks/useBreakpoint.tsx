@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import debounce from '@/functions/debounce'
+import { debounce } from 'lodash'
 import { IReturnBreakpoint } from './types'
 
 const breakpoints = {
@@ -19,6 +19,7 @@ const getBreakpoint = (breakpoint: IReturnBreakpoint): boolean => {
 
   return false
 }
+
 const useBreakpoint = (breakpoint: IReturnBreakpoint): boolean => {
   const [isBreakpoint, setIsBreakpoint] = useState<boolean>(false)
 

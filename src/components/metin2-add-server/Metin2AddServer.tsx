@@ -135,10 +135,6 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
     handleChange('userId', id)
   }, [id])
 
-  useEffect(() => {
-    console.log(formValues)
-  }, [formValues])
-
   return (
     <div className="metin2-add-server">
       <Grid container spacing={2}>
