@@ -59,7 +59,7 @@ function NavigationPages({ pageType, location, className }: INavigationPagesProp
                 },
                 {
                   label: 'Sunucu Yayınla',
-                  href: '/games/metin2/publish-server',
+                  href: '/games/metin2/publish-server?status=false',
                   icons: [
                     {
                       iconLocation: ['header'],

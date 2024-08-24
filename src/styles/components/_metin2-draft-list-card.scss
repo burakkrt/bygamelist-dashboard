@@ -1,0 +1,22 @@
+.metin2-draft-list-card {
+  display: grid;
+  grid-template-columns: 150px 250px 200px 80px 1fr;
+  gap: 12px;
+  padding: 16px 16px;
+  align-items: center;
+  border-bottom: 1px solid var(--gl-border-v2);
+  color: var(--gl-text-v2);
+  background: #114549;
+  background: -webkit-linear-gradient(to right, #323449, #114549);
+  background: linear-gradient(to right, #323449, #114549);
+
+  &:hover {
+    background: linear-gradient(to right, #3d3f58, #114549);
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+}

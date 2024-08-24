@@ -60,8 +60,8 @@ function Metin2DraftListFilter({ className }: IMetin2DraftListFilterProps) {
 
     setFilterValues((prev) => ({
       ...prev,
-      id: typeof id === 'string' ? id : prev.id,
-      name: typeof name === 'string' ? name : prev.name,
+      id: id ? id.toString() : prev.id, // id değeri string olarak ele alınıyor
+      name: name ? name.toString() : prev.name, // name değeri string olarak ele alınıyor
       status:
         typeof status === 'string' && allowedStatuses.includes(status as any)
           ? (status as IMetin2DraftListFilter['status'])

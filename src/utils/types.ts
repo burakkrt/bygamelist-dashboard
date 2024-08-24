@@ -51,6 +51,14 @@ export interface IServer {
   createdAt?: string
   updatedAt?: string
   level?: ILevel
+  status?: boolean
+}
+
+export interface IServerStatus {
+  id?: string
+  name?: string
+  openingDate?: string
+  status?: boolean
 }
 
 // FETCHER RESPONSE TYPES
@@ -76,5 +84,10 @@ export interface IGetEfsunlar {
 
 export interface IGetBosses {
   data: Array<IBosses>
+  meta: IMeta
+}
+
+export interface IGetServersStatus {
+  data: Array<IServerStatus>
   meta: IMeta
 }

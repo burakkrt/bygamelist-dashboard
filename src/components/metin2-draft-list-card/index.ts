@@ -1,0 +1,1 @@
+export { default } from './Metin2DraftListCard';

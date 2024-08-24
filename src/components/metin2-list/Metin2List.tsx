@@ -15,7 +15,7 @@ function Metin2List({}: IMetin2ListProps) {
   const { token } = useUserStore()
 
   const { data, isLoading, error } = useQuery<IGetServers>({
-    queryKey: ['servers', router.query],
+    queryKey: ['serverlist-auth', router.query],
     queryFn: () =>
       fetcher({
         endpoint: 'v1/serverlist-auth',

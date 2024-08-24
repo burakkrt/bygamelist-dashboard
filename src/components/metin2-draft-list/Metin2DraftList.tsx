@@ -1,25 +1,24 @@
 import React from 'react'
 import { useQuery, keepPreviousData } from '@tanstack/react-query'
-import { IGetServers, IServer } from '@/utils/types'
+import { IGetServersStatus, IServerStatus } from '@/utils/types'
 import fetcher from '@/utils/services/fetcher'
 import useUserStore from '@/store/useStore'
 import { useRouter } from 'next/router'
 import Spinner from '@/components/base/spinner'
-import Metin2ListCard from '@/components/metin2-list-card'
 import Pagination from '@/components/base/pagination'
 import Metin2DraftListFilter from '@/components/metin2-draft-list-filter'
-
 import { IMetin2DraftListProps } from './types'
+import Metin2DraftListCard from '../metin2-draft-list-card'
 
 function Metin2DraftList({}: IMetin2DraftListProps) {
   const router = useRouter()
   const { token } = useUserStore()
 
-  const { data, isLoading, error } = useQuery<IGetServers>({
-    queryKey: ['servers', router.query],
+  const { data, isLoading, error } = useQuery<IGetServersStatus>({
+    queryKey: ['serverlist-status', router.query],
     queryFn: () =>
       fetcher({
-        endpoint: 'v1/serverlist-auth',
+        endpoint: 'v1/serverlist-status',
         query: { ...router.query, pageSize: 12 },
         token,
       }),
@@ -51,8 +50,8 @@ function Metin2DraftList({}: IMetin2DraftListProps) {
 
     return (
       <div className="list">
-        {data.data.map((server: IServer) => (
-          <Metin2ListCard key={server.id} data={server} />
+        {data.data.map((server: IServerStatus) => (
+          <Metin2DraftListCard key={server.id} data={server} />
         ))}
         <span className="total-info">Toplam {data.meta.total} sunucu</span>
       </div>

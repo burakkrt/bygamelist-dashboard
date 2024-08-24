@@ -72,7 +72,7 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
   })
 
   const efsunlar = useQuery<IGetEfsunlar>({
-    queryKey: ['efsunlar'],
+    queryKey: ['efsun'],
     queryFn: () =>
       fetcher({
         endpoint: 'v1/efsun',
@@ -80,7 +80,7 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
   })
 
   const bosses = useQuery<IGetBosses>({
-    queryKey: ['bosses'],
+    queryKey: ['boss'],
     queryFn: () =>
       fetcher({
         endpoint: 'v1/boss',
