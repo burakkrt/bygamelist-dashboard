@@ -27,7 +27,10 @@ function Metin2DraftListFilter({ className }: IMetin2DraftListFilterProps) {
   const router = useRouter()
 
   const handleChange = (key: keyof IMetin2DraftListFilter, value: any) => {
-    setFilterValues((prev) => ({ ...prev, [key]: value }))
+    setFilterValues((prev) => ({
+      ...prev,
+      [key]: typeof value === 'string' ? value.trim() : value,
+    }))
   }
 
   const handleClear = () => {

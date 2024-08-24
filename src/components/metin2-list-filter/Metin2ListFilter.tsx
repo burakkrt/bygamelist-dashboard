@@ -25,7 +25,7 @@ function Metin2ListFilter({ className }: IMetin2ListFilterProps) {
   const router = useRouter()
 
   const handleChange = (key: keyof IMetin2ListFilter, value: any) => {
-    setFilterValues((prev) => ({ ...prev, [key]: value }))
+    setFilterValues((prev) => ({ ...prev, [key]: value.trim() }))
   }
 
   const handleClear = () => {
