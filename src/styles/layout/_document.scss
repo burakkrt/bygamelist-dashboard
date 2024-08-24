@@ -207,3 +207,33 @@ main {
   flex-direction: row !important;
   align-items: center !important;
 }
+
+.draft-list-action-dialog {
+  .MuiPaper-root {
+    padding: 16px 24px;
+    margin: 0;
+    color: var(--gl-text-v1);
+    background-color: var(--gl-body-v1);
+
+    .draft-dialog-title {
+      font-size: 22px;
+      font-weight: 600;
+      padding: 0;
+      margin: 12px 0;
+    }
+
+    .MuiDialogContent-root {
+      padding: 0;
+      margin-bottom: 24px;
+
+      .draft-dialog-text {
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+
+    .MuiDialogActions-root {
+      padding: 0;
+    }
+  }
+}
