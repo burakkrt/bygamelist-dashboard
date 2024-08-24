@@ -20,3 +20,38 @@
     gap: 10px;
   }
 }
+
+.server-draft-modal-infos {
+  margin: 12px 0;
+  .server-infos-title {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .info-list {
+    &-item {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      border-bottom: 1px solid var(--gl-border-v1);
+      background-color: var(--gl-body-v3);
+      font-size: 17px;
+
+      .title {
+        padding: 4px 8px;
+        border-right: 1px solid var(--gl-border-v1);
+      }
+
+      .value {
+        padding: 4px 8px;
+
+        .new-status {
+          color: var(--gl-green-v1);
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

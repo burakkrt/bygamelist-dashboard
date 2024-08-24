@@ -77,14 +77,14 @@ function Metin2DraftListCard({ data }: IMetin2DraftListCardProps) {
     updateStatus.mutate(undefined, {
       onSuccess: () => {
         handleCloseDialog()
-        toast.success('İşlem başarılı')
+        toast.success(`${name} adlı sunucu ${!status ? 'Yayına' : 'Taslağa'} alındı.`)
         queryClient.invalidateQueries({ queryKey: ['serverlist-status'] })
       },
-      onError: () => {
+      onError: (error) => {
         if (dialog.isOpen) {
           handleCloseDialog()
         }
-        toast.error('İşlem başarısız oldu.')
+        toast.error(`${error.message}. Sunucu : ${name}`)
       },
     })
   }
@@ -145,7 +145,41 @@ function Metin2DraftListCard({ data }: IMetin2DraftListCardProps) {
           <DialogContentText className="draft-dialog-text">
             {dialog.text}
           </DialogContentText>
+          <DialogContentText component="div" className="server-draft-modal-infos">
+            <span className="server-infos-title">İşlem yapılacak sunucu</span>
+            <ul className="info-list">
+              <li className="info-list-item">
+                <span className="title">Sunucu ID</span>
+                <span className="value">{id}</span>
+              </li>
+              <li className="info-list-item">
+                <span className="title">Sunucu İsmi</span>
+                <span className="value">{name}</span>
+              </li>
+              <li className="info-list-item">
+                <span className="title">Sunucu Durumu</span>
+                <span className="value">
+                  {status ? (
+                    <>
+                      <s>Yayında</s> {'>'} <span className="new-status">Taslak</span>
+                    </>
+                  ) : (
+                    <>
+                      <s>Taslak</s> {'>'} <span className="new-status">Yayında</span>
+                    </>
+                  )}
+                </span>
+              </li>
+              <li className="info-list-item">
+                <span className="title">Sunucu Açılış Tarihi</span>
+                <span className="value">
+                  {moment.utc(openingDate).local().format('DD MMMM YYYY HH:mm')}
+                </span>
+              </li>
+            </ul>
+          </DialogContentText>
         </DialogContent>
+
         <DialogActions>
           <Button onClick={handleCloseDialog} variant="contained" color="error">
             Vazgeç
