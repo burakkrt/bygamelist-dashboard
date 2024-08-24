@@ -1,3 +1,19 @@
+export interface ITeam {
+  owners?: Array<string>
+  comas?: Array<string>
+  teamLeaders?: Array<string>
+  gameAdmins?: Array<string>
+  gameMasters?: Array<string>
+}
+
+export interface ITeamIClipInput {
+  owners: string
+  comas: string
+  teamLeaders: string
+  gameAdmins: string
+  gameMasters: string
+}
+
 export interface IFormValuesAddServerFrom {
   userId: string
   status: boolean
@@ -18,6 +34,7 @@ export interface IFormValuesAddServerFrom {
   ownSalesSystem?: boolean
   efsunlar?: Array<string>
   bosses?: Array<string>
+  team?: ITeam
 }
 
 export interface IMetin2AddServerProps {}

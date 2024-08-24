@@ -10,9 +10,22 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import fetcher from '@/utils/services/fetcher'
 import Button from '@/components/base/button'
 import Icon from '@/components/base/icon'
-import { Box, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
+import {
+  Box,
+  Chip,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material'
 import { IGetBosses, IGetEfsunlar, IGetLevels } from '@/utils/types'
-import { IFormValuesAddServerFrom, IMetin2AddServerProps } from './types'
+import {
+  IFormValuesAddServerFrom,
+  IMetin2AddServerProps,
+  ITeam,
+  ITeamIClipInput,
+} from './types'
 
 function Metin2AddServer({}: IMetin2AddServerProps) {
   const initialFormValues: IFormValuesAddServerFrom = {
@@ -35,9 +48,19 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
     website: undefined,
     efsunlar: undefined,
     bosses: undefined,
+    team: undefined,
+  }
+
+  const initialTeamValues: ITeamIClipInput = {
+    owners: '',
+    comas: '',
+    gameAdmins: '',
+    gameMasters: '',
+    teamLeaders: '',
   }
   const [formValues, setFormValues] =
     useState<IFormValuesAddServerFrom>(initialFormValues)
+  const [teamInputs, setTeamInputs] = useState<ITeamIClipInput>(initialTeamValues)
   const { id, token: userToken } = useUserStore()
 
   const levels = useQuery<IGetLevels>({
@@ -77,9 +100,14 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
       }),
     onSuccess: (data) => {
       setFormValues({ ...initialFormValues, userId: id })
+      setTeamInputs(initialTeamValues)
       toast.success(
         `Sunucu oluşturuldu ve ${data.data[0].status ? 'Yayınlandı.' : 'Taslak olarak kaydedildi'}`
       )
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
     },
     onError: (err) => {
       toast.error(err.message)
@@ -89,6 +117,65 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
 
   const handleChange = (key: keyof IFormValuesAddServerFrom, value: any) => {
     setFormValues((prev) => ({ ...prev, [key]: value }))
+  }
+
+  const hanleChanceTeam = (key: keyof ITeam, value: string) => {
+    setTeamInputs((prev) => ({ ...prev, [key]: value }))
+  }
+
+  const handleDeleteTeam = (key: keyof ITeamIClipInput, value: string) => {
+    setFormValues((prev) => {
+      if (!prev.team) {
+        return prev
+      }
+
+      const currentKeyValue = prev.team[key]
+
+      if (!Array.isArray(currentKeyValue)) {
+        return prev
+      }
+
+      const updatedTeam = {
+        ...prev.team,
+        [key]: currentKeyValue.filter((member) => member !== value),
+      }
+
+      Object.keys(updatedTeam).forEach((k) => {
+        const keyValue = updatedTeam[k as keyof ITeamIClipInput]
+        if (Array.isArray(keyValue) && keyValue.length === 0) {
+          delete updatedTeam[k as keyof ITeamIClipInput]
+        }
+      })
+
+      const isTeamEmpty = Object.keys(updatedTeam).length === 0
+
+      return {
+        ...prev,
+        team: isTeamEmpty ? undefined : updatedTeam,
+      }
+    })
+  }
+
+  const handleKeyDownTeam = (
+    e: React.KeyboardEvent<HTMLDivElement>,
+    key: keyof ITeam
+  ) => {
+    if (e.key === 'Enter' && teamInputs[key]?.trim() !== '') {
+      setFormValues((prev) => ({
+        ...prev,
+        team: {
+          ...prev.team,
+          [key]: prev.team?.[key]
+            ? [...(prev.team[key] as string[]), teamInputs[key].trim()]
+            : [teamInputs[key].trim()],
+        },
+      }))
+      setTeamInputs((prev) => ({
+        ...prev,
+        [key]: initialTeamValues[key],
+      }))
+      e.preventDefault()
+    }
   }
 
   const parseBooleanhandleChange = (
@@ -521,6 +608,131 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
                       ))}
                   </Select>
                 </FormControl>
+              </Grid>
+              {/* team > owners */}
+              <Grid xs={12}>
+                <TextField
+                  label="Takım > Owners"
+                  variant="filled"
+                  fullWidth
+                  placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
+                  value={teamInputs.owners}
+                  onChange={(e) => hanleChanceTeam('owners', e.target.value)}
+                  onKeyDown={(e) => handleKeyDownTeam(e, 'owners')}
+                />
+
+                {formValues?.team?.owners && (
+                  <div className="team-clips">
+                    {formValues.team.owners.map((chip) => (
+                      <Chip
+                        key={chip}
+                        label={chip}
+                        onDelete={() => handleDeleteTeam('owners', chip)}
+                        className="team-clips-item"
+                      />
+                    ))}
+                  </div>
+                )}
+              </Grid>
+              {/* team > comas */}
+              <Grid xs={12}>
+                <TextField
+                  label="Takım > COMA's"
+                  variant="filled"
+                  fullWidth
+                  placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
+                  value={teamInputs.comas}
+                  onChange={(e) => hanleChanceTeam('comas', e.target.value)}
+                  onKeyDown={(e) => handleKeyDownTeam(e, 'comas')}
+                />
+
+                {formValues?.team?.comas && (
+                  <div className="team-clips">
+                    {formValues.team.comas.map((chip) => (
+                      <Chip
+                        key={chip}
+                        label={chip}
+                        onDelete={() => handleDeleteTeam('comas', chip)}
+                        className="team-clips-item"
+                      />
+                    ))}
+                  </div>
+                )}
+              </Grid>
+              {/* team > team leaders */}
+              <Grid xs={12}>
+                <TextField
+                  label="Takım > Team Leaders"
+                  variant="filled"
+                  fullWidth
+                  placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
+                  value={teamInputs.teamLeaders}
+                  onChange={(e) => hanleChanceTeam('teamLeaders', e.target.value)}
+                  onKeyDown={(e) => handleKeyDownTeam(e, 'teamLeaders')}
+                />
+
+                {formValues?.team?.teamLeaders && (
+                  <div className="team-clips">
+                    {formValues.team.teamLeaders.map((chip) => (
+                      <Chip
+                        key={chip}
+                        label={chip}
+                        onDelete={() => handleDeleteTeam('teamLeaders', chip)}
+                        className="team-clips-item"
+                      />
+                    ))}
+                  </div>
+                )}
+              </Grid>
+              {/* team > game admins */}
+              <Grid xs={12}>
+                <TextField
+                  label="Takım > Game Admins"
+                  variant="filled"
+                  fullWidth
+                  placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
+                  value={teamInputs.gameAdmins}
+                  onChange={(e) => hanleChanceTeam('gameAdmins', e.target.value)}
+                  onKeyDown={(e) => handleKeyDownTeam(e, 'gameAdmins')}
+                />
+
+                {formValues?.team?.gameAdmins && (
+                  <div className="team-clips">
+                    {formValues.team.gameAdmins.map((chip) => (
+                      <Chip
+                        key={chip}
+                        label={chip}
+                        onDelete={() => handleDeleteTeam('gameAdmins', chip)}
+                        className="team-clips-item"
+                      />
+                    ))}
+                  </div>
+                )}
+              </Grid>
+              {/* team > game masters */}
+              <Grid xs={12}>
+                <TextField
+                  label="Takım > Game Masters"
+                  variant="filled"
+                  fullWidth
+                  placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
+                  value={teamInputs.gameMasters}
+                  onChange={(e) => hanleChanceTeam('gameMasters', e.target.value)}
+                  onKeyDown={(e) => handleKeyDownTeam(e, 'gameMasters')}
+                />
+
+                {formValues?.team?.gameMasters && (
+                  <div className="team-clips">
+                    {formValues.team.gameMasters.map((chip) => (
+                      <Chip
+                        key={chip}
+                        label={chip}
+                        onDelete={() => handleDeleteTeam('gameMasters', chip)}
+                        className="team-clips-item"
+                      />
+                    ))}
+                  </div>
+                )}
               </Grid>
               {/* form butonları */}
               <Grid xs={12}>

@@ -39,6 +39,37 @@
         }
       }
     }
+
+    .team-clips {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 6px 3px;
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      border-bottom: 1px solid var(--gl-border-v1);
+      border-left: 1px solid var(--gl-border-v1);
+      border-right: 1px solid var(--gl-border-v1);
+      background-color: var(--gl-body-v2);
+
+      &-item {
+        height: 28px;
+
+        background-color: var(--gl-green-v2);
+
+        .MuiChip-label {
+          color: var(--gl-text-v2);
+          font-size: 14px;
+        }
+
+        .MuiSvgIcon-root {
+          color: var(--gl-body-v3);
+        }
+      }
+    }
   }
 
   .opening-time {
