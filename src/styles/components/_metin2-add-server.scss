@@ -40,33 +40,50 @@
       }
     }
 
-    .team-clips {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-      gap: 6px;
-      padding: 6px 3px;
-      border-bottom-left-radius: 4px;
-      border-bottom-right-radius: 4px;
-      border-bottom: 1px solid var(--gl-border-v1);
-      border-left: 1px solid var(--gl-border-v1);
-      border-right: 1px solid var(--gl-border-v1);
-      background-color: var(--gl-body-v2);
-
-      &-item {
-        height: 28px;
-
-        background-color: var(--gl-green-v2);
-
-        .MuiChip-label {
-          color: var(--gl-text-v2);
-          font-size: 14px;
+    .team-box {
+      &.not-empty {
+        .team-box-input {
+          .MuiInputBase-input {
+            background: #b2ff9473;
+            background: -webkit-linear-gradient(0deg, #b2ff9473, #ecffe5);
+            background: linear-gradient(0deg, #bcf3d173, #ecffe5);
+          }
         }
+        .team-box-clips {
+          background: #b2ff9473;
+          background: -webkit-linear-gradient(0deg, #b2ff9473, #ecffe5);
+          background: linear-gradient(0deg, #bcf3d173, #ecffe5);
+        }
+      }
 
-        .MuiSvgIcon-root {
-          color: var(--gl-body-v3);
+      &-clips {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 6px 3px;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-bottom: 1px solid var(--gl-border-v1);
+        border-left: 1px solid var(--gl-border-v1);
+        border-right: 1px solid var(--gl-border-v1);
+        background-color: var(--gl-body-v2);
+
+        &-item {
+          height: 28px;
+
+          background-color: var(--gl-subtitle-v1);
+
+          .MuiChip-label {
+            color: var(--gl-text-v2);
+            font-size: 14px;
+          }
+
+          .MuiSvgIcon-root {
+            color: var(--gl-body-v3);
+          }
         }
       }
     }

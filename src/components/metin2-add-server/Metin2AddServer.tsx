@@ -611,128 +611,168 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
               </Grid>
               {/* team > owners */}
               <Grid xs={12}>
-                <TextField
-                  label="Takım > Owners"
-                  variant="filled"
-                  fullWidth
-                  placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
-                  value={teamInputs.owners}
-                  onChange={(e) => hanleChanceTeam('owners', e.target.value)}
-                  onKeyDown={(e) => handleKeyDownTeam(e, 'owners')}
-                />
+                <div
+                  className={classNames(
+                    'team-box',
+                    formValues.team?.owners ? 'not-empty' : 'empty'
+                  )}
+                >
+                  <TextField
+                    label="Takım > Owners"
+                    variant="filled"
+                    fullWidth
+                    placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
+                    value={teamInputs.owners}
+                    onChange={(e) => hanleChanceTeam('owners', e.target.value)}
+                    onKeyDown={(e) => handleKeyDownTeam(e, 'owners')}
+                    className="team-box-input"
+                  />
 
-                {formValues?.team?.owners && (
-                  <div className="team-clips">
-                    {formValues.team.owners.map((chip) => (
-                      <Chip
-                        key={chip}
-                        label={chip}
-                        onDelete={() => handleDeleteTeam('owners', chip)}
-                        className="team-clips-item"
-                      />
-                    ))}
-                  </div>
-                )}
+                  {formValues?.team?.owners && (
+                    <div className="team-box-clips">
+                      {formValues.team.owners.map((chip) => (
+                        <Chip
+                          key={chip}
+                          label={chip}
+                          onDelete={() => handleDeleteTeam('owners', chip)}
+                          className="team-box-clips-item"
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
               </Grid>
               {/* team > comas */}
               <Grid xs={12}>
-                <TextField
-                  label="Takım > COMA's"
-                  variant="filled"
-                  fullWidth
-                  placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
-                  value={teamInputs.comas}
-                  onChange={(e) => hanleChanceTeam('comas', e.target.value)}
-                  onKeyDown={(e) => handleKeyDownTeam(e, 'comas')}
-                />
+                <div
+                  className={classNames(
+                    'team-box',
+                    formValues.team?.comas ? 'not-empty' : 'empty'
+                  )}
+                >
+                  <TextField
+                    label="Takım > COMA's"
+                    variant="filled"
+                    fullWidth
+                    placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
+                    value={teamInputs.comas}
+                    onChange={(e) => hanleChanceTeam('comas', e.target.value)}
+                    onKeyDown={(e) => handleKeyDownTeam(e, 'comas')}
+                    className="team-box-input"
+                  />
 
-                {formValues?.team?.comas && (
-                  <div className="team-clips">
-                    {formValues.team.comas.map((chip) => (
-                      <Chip
-                        key={chip}
-                        label={chip}
-                        onDelete={() => handleDeleteTeam('comas', chip)}
-                        className="team-clips-item"
-                      />
-                    ))}
-                  </div>
-                )}
+                  {formValues?.team?.comas && (
+                    <div className="team-box-clips">
+                      {formValues.team.comas.map((chip) => (
+                        <Chip
+                          key={chip}
+                          label={chip}
+                          onDelete={() => handleDeleteTeam('comas', chip)}
+                          className="team-box-clips-item"
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
               </Grid>
               {/* team > team leaders */}
               <Grid xs={12}>
-                <TextField
-                  label="Takım > Team Leaders"
-                  variant="filled"
-                  fullWidth
-                  placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
-                  value={teamInputs.teamLeaders}
-                  onChange={(e) => hanleChanceTeam('teamLeaders', e.target.value)}
-                  onKeyDown={(e) => handleKeyDownTeam(e, 'teamLeaders')}
-                />
+                <div
+                  className={classNames(
+                    'team-box',
+                    formValues.team?.teamLeaders ? 'not-empty' : 'empty'
+                  )}
+                >
+                  <TextField
+                    label="Takım > Team Leaders"
+                    variant="filled"
+                    fullWidth
+                    placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
+                    value={teamInputs.teamLeaders}
+                    onChange={(e) => hanleChanceTeam('teamLeaders', e.target.value)}
+                    onKeyDown={(e) => handleKeyDownTeam(e, 'teamLeaders')}
+                    className="team-box-input"
+                  />
 
-                {formValues?.team?.teamLeaders && (
-                  <div className="team-clips">
-                    {formValues.team.teamLeaders.map((chip) => (
-                      <Chip
-                        key={chip}
-                        label={chip}
-                        onDelete={() => handleDeleteTeam('teamLeaders', chip)}
-                        className="team-clips-item"
-                      />
-                    ))}
-                  </div>
-                )}
+                  {formValues?.team?.teamLeaders && (
+                    <div className="team-box-clips">
+                      {formValues.team.teamLeaders.map((chip) => (
+                        <Chip
+                          key={chip}
+                          label={chip}
+                          onDelete={() => handleDeleteTeam('teamLeaders', chip)}
+                          className="team-box-clips-item"
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
               </Grid>
               {/* team > game admins */}
               <Grid xs={12}>
-                <TextField
-                  label="Takım > Game Admins"
-                  variant="filled"
-                  fullWidth
-                  placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
-                  value={teamInputs.gameAdmins}
-                  onChange={(e) => hanleChanceTeam('gameAdmins', e.target.value)}
-                  onKeyDown={(e) => handleKeyDownTeam(e, 'gameAdmins')}
-                />
+                <div
+                  className={classNames(
+                    'team-box',
+                    formValues.team?.gameAdmins ? 'not-empty' : 'empty'
+                  )}
+                >
+                  <TextField
+                    label="Takım > Game Admins"
+                    variant="filled"
+                    fullWidth
+                    placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
+                    value={teamInputs.gameAdmins}
+                    onChange={(e) => hanleChanceTeam('gameAdmins', e.target.value)}
+                    onKeyDown={(e) => handleKeyDownTeam(e, 'gameAdmins')}
+                    className="team-box-input"
+                  />
 
-                {formValues?.team?.gameAdmins && (
-                  <div className="team-clips">
-                    {formValues.team.gameAdmins.map((chip) => (
-                      <Chip
-                        key={chip}
-                        label={chip}
-                        onDelete={() => handleDeleteTeam('gameAdmins', chip)}
-                        className="team-clips-item"
-                      />
-                    ))}
-                  </div>
-                )}
+                  {formValues?.team?.gameAdmins && (
+                    <div className="team-box-clips">
+                      {formValues.team.gameAdmins.map((chip) => (
+                        <Chip
+                          key={chip}
+                          label={chip}
+                          onDelete={() => handleDeleteTeam('gameAdmins', chip)}
+                          className="team-box-clips-item"
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
               </Grid>
               {/* team > game masters */}
               <Grid xs={12}>
-                <TextField
-                  label="Takım > Game Masters"
-                  variant="filled"
-                  fullWidth
-                  placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
-                  value={teamInputs.gameMasters}
-                  onChange={(e) => hanleChanceTeam('gameMasters', e.target.value)}
-                  onKeyDown={(e) => handleKeyDownTeam(e, 'gameMasters')}
-                />
+                <div
+                  className={classNames(
+                    'team-box',
+                    formValues.team?.gameMasters ? 'not-empty' : 'empty'
+                  )}
+                >
+                  <TextField
+                    label="Takım > Game Masters"
+                    variant="filled"
+                    fullWidth
+                    placeholder="İsim girip enter 'a bas. Birden fazla girilebilir."
+                    value={teamInputs.gameMasters}
+                    onChange={(e) => hanleChanceTeam('gameMasters', e.target.value)}
+                    onKeyDown={(e) => handleKeyDownTeam(e, 'gameMasters')}
+                    className="team-box-input"
+                  />
 
-                {formValues?.team?.gameMasters && (
-                  <div className="team-clips">
-                    {formValues.team.gameMasters.map((chip) => (
-                      <Chip
-                        key={chip}
-                        label={chip}
-                        onDelete={() => handleDeleteTeam('gameMasters', chip)}
-                        className="team-clips-item"
-                      />
-                    ))}
-                  </div>
-                )}
+                  {formValues?.team?.gameMasters && (
+                    <div className="team-box-clips">
+                      {formValues.team.gameMasters.map((chip) => (
+                        <Chip
+                          key={chip}
+                          label={chip}
+                          onDelete={() => handleDeleteTeam('gameMasters', chip)}
+                          className="team-box-clips-item"
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
               </Grid>
               {/* form butonları */}
               <Grid xs={12}>
