@@ -13,7 +13,7 @@ export type IContentTypes =
   | 'audio/mpeg'
   | 'video/mp4'
 
-export type IMethods = 'GET' | 'POST' | 'PUT' | 'DELETE'
+export type IMethods = 'GET' | 'POST' | 'PATCH' | 'DELETE'
 
 export interface IFetcherProps {
   endpoint: string

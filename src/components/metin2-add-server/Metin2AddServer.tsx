@@ -234,7 +234,7 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
               {/* kullanıcı id */}
               <Grid xs={12}>
                 <TextField
-                  label="Kullanıcı id"
+                  label="Kullanıcı id *"
                   variant="filled"
                   fullWidth
                   disabled

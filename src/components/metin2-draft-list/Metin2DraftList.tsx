@@ -23,6 +23,7 @@ function Metin2DraftList({}: IMetin2DraftListProps) {
         token,
       }),
     placeholderData: keepPreviousData,
+    enabled: !!token,
   })
 
   const renderContent = () => {

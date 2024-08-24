@@ -23,6 +23,7 @@ function Metin2List({}: IMetin2ListProps) {
         token,
       }),
     placeholderData: keepPreviousData,
+    enabled: !!token,
   })
 
   const renderContent = () => {

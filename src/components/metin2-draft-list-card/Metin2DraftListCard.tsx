@@ -10,14 +10,19 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@mui/material'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import fetcher from '@/utils/services/fetcher'
+import useUserStore from '@/store/useStore'
 import { IDialog, IDialogTypes, IInitialDialog, IMetin2DraftListCardProps } from './types'
 
 const liveActionDialog: IInitialDialog = {
+  actionType: 'live',
   title: 'Sunucu yayınlansın mı ?',
   text: "Bu işlemden sonra sunucu yayına alınacak. Bu işlemi yapmadan önce tüm bilgilerin doğru olduğundan emin ol. Eğer bir şeyler yanlış giderse tekrar sunucuyu taslak 'a çevirebilirsin.",
 }
 
 const draftActionDialog: IInitialDialog = {
+  actionType: 'draft',
   title: 'Sunucu taslağa alınsın mı ?',
   text: 'Bu işlemden sonra sunucu yayından kaldırılıp taslak olarak kaydedilecek. Taslak sürecinde düzenleyebilir ve tekrar yayına alabilirsin.',
 }
@@ -28,7 +33,20 @@ function Metin2DraftListCard({ data }: IMetin2DraftListCardProps) {
     isOpen: false,
   })
   const { id, name, openingDate, status } = data
+  const { token } = useUserStore()
   const router = useRouter()
+  const queryClient = useQueryClient()
+
+  const updateStatus = useMutation({
+    mutationFn: () =>
+      fetcher({
+        endpoint: `v1/server/${id}`,
+        method: 'PATCH',
+        token,
+        body: { status: !status },
+      }),
+    onSuccess: () => {},
+  })
 
   const handleRouteServerPage = (serverId?: string) => {
     if (serverId) {
@@ -42,7 +60,7 @@ function Metin2DraftListCard({ data }: IMetin2DraftListCardProps) {
     setDialog((prev) => ({ ...prev, isOpen: false }))
   }
 
-  const openDialog = (type: IDialogTypes) => {
+  const handleOpenDialog = (type: IDialogTypes) => {
     switch (type) {
       case 'live':
         setDialog({ ...liveActionDialog, isOpen: true })
@@ -53,6 +71,22 @@ function Metin2DraftListCard({ data }: IMetin2DraftListCardProps) {
       default:
         break
     }
+  }
+
+  const handleChanceStatus = () => {
+    updateStatus.mutate(undefined, {
+      onSuccess: () => {
+        handleCloseDialog()
+        toast.success('İşlem başarılı')
+        queryClient.invalidateQueries({ queryKey: ['serverlist-status'] })
+      },
+      onError: () => {
+        if (dialog.isOpen) {
+          handleCloseDialog()
+        }
+        toast.error('İşlem başarısız oldu.')
+      },
+    })
   }
 
   return (
@@ -70,7 +104,7 @@ function Metin2DraftListCard({ data }: IMetin2DraftListCardProps) {
             variant="contained"
             size="small"
             color="secondary"
-            onClick={() => openDialog('draft')}
+            onClick={() => handleOpenDialog('draft')}
           >
             Taslağa çevir
           </Button>
@@ -81,7 +115,7 @@ function Metin2DraftListCard({ data }: IMetin2DraftListCardProps) {
               variant="contained"
               size="small"
               color="success"
-              onClick={() => openDialog('live')}
+              onClick={() => handleOpenDialog('live')}
             >
               Yayına al
             </Button>
@@ -117,7 +151,7 @@ function Metin2DraftListCard({ data }: IMetin2DraftListCardProps) {
             Vazgeç
           </Button>
           <Button
-            onClick={handleCloseDialog}
+            onClick={handleChanceStatus}
             autoFocus
             variant="contained"
             color="success"

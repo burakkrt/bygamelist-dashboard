@@ -4,6 +4,7 @@ export type IDialogTypes = 'live' | 'draft'
 
 export interface IDialog {
   isOpen: boolean
+  actionType: IDialogTypes
   title?: string
   text: string
 }
