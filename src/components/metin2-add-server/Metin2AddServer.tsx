@@ -299,8 +299,8 @@ function Metin2AddServer({}: IMetin2AddServerProps) {
                           <MenuItem value={1}>1 Client</MenuItem>
                           <MenuItem value={2}>2 Client</MenuItem>
                           <MenuItem value={3}>3 Client</MenuItem>
-                          <MenuItem value={3}>4 Client</MenuItem>
-                          <MenuItem value={3}>5 Client</MenuItem>
+                          <MenuItem value={4}>4 Client</MenuItem>
+                          <MenuItem value={5}>5 Client</MenuItem>
                         </Select>
                       </FormControl>
                     </Grid>
